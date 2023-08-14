@@ -5,6 +5,8 @@ import './login-component.styles.css';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -17,6 +19,9 @@ const Login = () => {
 
     const handleSubmit = (event) => {
     event.preventDefault();
+
+    setLoading(true);
+    setError('');
 
     const apiUrl = "https://crime-analysis-jno2.onrender.com";
     const endpoint = "/api/v1/auth/login";
@@ -49,6 +54,7 @@ const Login = () => {
     })
     .then(response => {
         if (!response.ok) {
+            setLoading(false);
             throw new Error(`Request failed with status: ${response.status}`);
         }
         return response.json();
@@ -58,6 +64,7 @@ const Login = () => {
         // Clear email and password fields
         setEmail('');
         setPassword('');
+        setLoading(false);
     })
     .catch(error => {
         console.error("Error:", error);
@@ -89,7 +96,10 @@ const Login = () => {
                                 <span>Forgotten password?</span>
                             </Link>
                         </div>
-                        <button type="submit" className="btn">Log In</button>
+                        <button type="submit" className="btn" disabled={loading}>
+                            {loading ? "Logging In..." : "Log In"}
+                        </button>
+                        {error && <p className="error-message">{error}</p>}
                     </form>
                     <p><span style={{color:'gray',fontSize: 13}}>Don't have an account?</span> <Link to="/sign-up" style={{color:'darkblue',fontSize: 13,textDecoration:'none'}}>Sign up</Link></p>
                 </section>

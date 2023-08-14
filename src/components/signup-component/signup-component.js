@@ -5,7 +5,8 @@ const SignUp = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const handleName = (event) => {
         setName(event.target.value);
@@ -14,50 +15,57 @@ const SignUp = () => {
     const handleEmail = (event) => {
         setEmail(event.target.value);
     };   
-    
+        
     const handlePassword = (event) => {
         setPassword(event.target.value);
-    };  
+    };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const apiUrl = "https://crime-analysis-jno2.onrender.com";
-        const endpoint = "/api/v1/auth/register";
-        const url = apiUrl + endpoint;
+        setLoading(true);
+        setError('');
 
-        console.log(url);
+        try {
+            const apiUrl = "https://crime-analysis-jno2.onrender.com";
+            const endpoint = "/api/v1/auth/register";
+            const url = apiUrl + endpoint;
 
-        // registration data
-        const regData = {
-            fullName: name,
-            email: email,
-            password: password
-        };
+            console.log(url);
 
-        console.log(regData);
+            // Registration data
+            const regData = {
+                fullName: name,
+                email: email,
+                password: password
+            };
 
-        // Make the POST request
-        fetch(url, {
-            method: "POST",
-            body: JSON.stringify(regData)
-        })
-        .then(response => {
+            console.log(regData);
+
+            const response = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(regData),
+                headers: {
+                "Content-Type": "application/json"
+                }
+            });
+
             if (!response.ok) {
-                throw new Error(`Request failed with status: ${response.status}`);
+                const data = await response.json();
+                throw new Error(data.message || `Request failed with status: ${response.status}`);
             }
-            return response.json();
-        })
-        .then(data => {
+
+            const data = await response.json();
             console.log("Sign-up Response:", data);
-            // Clear name, email and password fields
-            setName('');
-            setEmail('');
-            setPassword('');
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
+            // Clear name, email, and password fields
+                setName('');
+                setEmail('');
+                setPassword('');
+        }catch (error) {
+            setError(error.message || "An error occurred");
+        }finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -66,22 +74,25 @@ const SignUp = () => {
                 <section className="form-section">
                     <div className="login">
                         <span id="circle"></span>
-                        <h3>CFAS Sign-Up</h3>
+                        <h3>CFAS Sign Up</h3>
                     </div>
                     <form onSubmit={handleSubmit} className="log">
                         <div>
-                            <label htmlFor="email">Fullname:</label><br />
-                            <input type="text" name="fname" onChange={handleName} value={name} id="name" required />
+                            <label htmlFor="name">Fullname:</label><br />
+                            <input type="text" name="name" onChange={handleName} value={name} id="name" required />
                         </div>
                         <div>
                             <label htmlFor="email">Email Address:</label><br />
                             <input type="email" name="email" onChange={handleEmail} value={email} id="email" required />
                         </div>
                         <div>
-                            <label htmlFor="pwd">Password:</label><br />
-                            <input type="password" name="pwd" onChange={handlePassword} value={password} id="pwd" required />
+                            <label htmlFor="password">Password:</label><br />
+                            <input type="password" name="password" onChange={handlePassword} value={password} id="password" required />
                         </div>
-                        <button type="submit" className="btn">Sign Up</button>
+                        <button type="submit" className="btn" disabled={loading}>
+                        {loading ? "Signing Up..." : "Sign Up"}
+                        </button>
+                        {error && <p className="error-message">{error}</p>}
                     </form>
                 </section>
                 <section className="circle-section">
@@ -91,7 +102,7 @@ const SignUp = () => {
                     </p>
                     <div className="learn">
                         <div className="span">
-                            <span className="more">Learn More</span>
+                        <span className="more">Learn More</span>
                         </div>
                     </div>
                 </section>
