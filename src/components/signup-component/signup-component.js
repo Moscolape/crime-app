@@ -28,19 +28,19 @@ const SignUp = () => {
 
         console.log(url);
 
-        // Sample login data
-        const loginData = {
+        // registration data
+        const regData = {
             fullName: name,
             email: email,
             password: password
         };
 
-        console.log(loginData);
+        console.log(regData);
 
         // Make the POST request
         fetch(url, {
             method: "POST",
-            body: JSON.stringify(loginData)
+            body: JSON.stringify(regData)
         })
         .then(response => {
             if (!response.ok) {
@@ -50,7 +50,7 @@ const SignUp = () => {
         })
         .then(data => {
             console.log("Sign-up Response:", data);
-            // Clear email and password fields
+            // Clear name, email and password fields
             setName('');
             setEmail('');
             setPassword('');
