@@ -1,0 +1,150 @@
+/* Main styling */
+.main {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.login {
+    color: #9F81F1;
+}
+
+#circle {
+    display: inline-block;
+    border: 3px solid #997BD1;
+    box-shadow: 0 0 10px #9F81F1;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+
+.circle-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(to top, #9f81f1, #e49376);
+    padding: 0 7%;
+    border-radius: 350px 0 0 350px;
+    box-shadow: 0 0 50px #997BD1;
+    color: white;
+    font-size: 12px;
+}
+
+.circle-section h1 {
+    font-size: 2.5rem;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 55%;
+    height: 100%;
+    padding: 0 10%;
+    text-align: center;
+}
+
+.form-section :nth-child(1) {
+    align-items: center;
+}
+
+
+/* Form styling */
+form {
+    font-size: 13px;
+}
+
+input[type='email'], input[type='password'], input[type='text'] {
+    width: 100%;
+    height: 30px;
+    padding-left: 5px;
+}
+
+.log input[type='email']:focus, input[type='password']:focus, input[type='text']:focus {
+    outline: 1px solid #997BD1;
+    border: 1px solid #997BD1;
+    border-radius: 3px;
+}
+
+.log div {
+    text-align: initial;
+    margin-top: 20px;
+}
+
+.btn {
+    margin-top: 20px;
+}
+
+button {
+    width: 100%;
+    padding: 8px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(to right, #9f81f1, #e49376);
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.forget {
+    text-decoration: none;
+    color: darkblue;
+}
+
+.reset {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: darkblue;
+}
+
+.learn {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.span {
+    background: white;
+    margin-right: 20px;
+    padding: 7px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.more {
+    background-image: linear-gradient(to right, #9f81f1, #e49376);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-color: white;
+}
+
+
+@media screen and (max-width: 800px) {
+    .circle-section {
+        display: none;
+    }
+
+    .form-section {
+        width: 100%;
+    }
+    
+    form div {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    input[type='email'], input[type='password'] {
+        width: 100%;
+        border: 1px solid gray;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .reset {
+        font-size: 10px;
+    }
+}
