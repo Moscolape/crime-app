@@ -122,6 +122,16 @@ button {
     background-color: white;
 }
 
+.modal-content {
+    text-align: center;
+}
+
+.modal-btn {
+    width: 30%;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
 
 @media screen and (max-width: 800px) {
     .circle-section {
@@ -148,5 +158,9 @@ button {
 @media screen and (max-width: 350px) {
     .reset {
         font-size: 10px;
+    }
+
+    .modal-content {
+        width: 100%;
     }
 }

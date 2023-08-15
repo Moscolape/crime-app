@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import Modal from 'react-modal';
 import './login-component.styles.css';
 
 const Login = () => {
@@ -7,6 +8,9 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const navigate = useNavigate();
+
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -18,57 +22,64 @@ const Login = () => {
 
 
     const handleSubmit = (event) => {
-    event.preventDefault();
+        event.preventDefault();
 
-    setLoading(true);
-    setError('');
+        setLoading(true);
+        setError('');
 
-    const apiUrl = "https://crime-analysis-jno2.onrender.com";
-    const endpoint = "/api/v1/auth/login";
-    const url = apiUrl + endpoint;
+        const apiUrl = "https://crime-analysis-jno2.onrender.com";
+        const endpoint = "/api/v1/auth/login";
+        const url = apiUrl + endpoint;
 
-    console.log(url);
+        console.log(url);
 
-    const token = "1ee95ab0f114571473f29265eb062e7a7b278d1e48db2c755b88ae18d6ea6974";
+        const token = "1ee95ab0f114571473f29265eb062e7a7b278d1e48db2c755b88ae18d6ea6974";
 
-    const headers = {
-        "Authorization": `Bearer ${token}`
-    };
+        const headers = {
+            "Authorization": `Bearer ${token}`
+        };
 
-    // Sample login data
-    const loginData = {
-        email: email,
-        password: password
-    };
+        // Sample login data
+        const loginData = {
+            email: email,
+            password: password
+        };
 
-    console.log(loginData);
+        console.log(loginData);
 
-    // Make the POST request
-    fetch(url, {
-        method: "POST",
-        headers: {
-            ...headers,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(loginData)
-    })
-    .then(response => {
-        if (!response.ok) {
+        // Make the POST request
+        fetch(url, {
+            method: "POST",
+            headers: {
+                ...headers,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(loginData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                setLoading(false);
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Login Response:", data);
+            if(data.msg.includes('granted')) {
+                setModalIsOpen(true);
+                // Route to reset page after 5 seconds
+                setTimeout(() => {
+                    navigate('/my-dashboard');
+                }, 5000);
+            }
+            // Clear email and password fields
+            setEmail('');
+            setPassword('');
             setLoading(false);
-            throw new Error(`Request failed with status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log("Login Response:", data);
-        // Clear email and password fields
-        setEmail('');
-        setPassword('');
-        setLoading(false);
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
     }
 
     return (
@@ -115,6 +126,45 @@ const Login = () => {
                     </div>
                 </section>
             </main>
+            <Modal
+                style={{
+                    overlay: {
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(255, 255, 255, 0.8)'
+                    },
+                    content: {
+                        position: 'absolute',
+                        top: '35%',
+                        // width: '80%',
+                        bottom: '35%',
+                        left: '5%',
+                        right: '5%',
+                        // height: '15%',
+                        fontSize: '12px',
+                        margin: 'auto',
+                        border: '1px solid #ccc',
+                        background: '#fff',
+                        overflow: 'auto',
+                        WebkitOverflowScrolling: 'touch',
+                        borderRadius: '4px',
+                        outline: 'none',
+                        // padding: '20px'
+                        }
+                }}
+                isOpen={modalIsOpen}
+                onRequestClose={() => setModalIsOpen(false)}
+                contentLabel="Login Success Modal"
+                ariaHideApp={false}
+            >
+                <div className="modal-content">
+                    <p>You have been successfully logged in!! You'd be redirected to your dashboard page in a short moment...</p>
+                    {/* <button onClick={() => setModalIsOpen(false)} className="modal-btn">Ok</button> */}
+                </div>
+            </Modal>
         </>
     )
 };
