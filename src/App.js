@@ -1,16 +1,23 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from "react";
 
 import './App.css';
+import Spinner from './components/spinner/spinner-component';
 
-import Login from './components/login-component/login-component';
-import PasswordReset from './components/reset-password-component/reset-password-component';
-import SignUp from './components/signup-component/signup-component';
-import Dashboard from './components/my-dashboard-component/my-dashboard-component';
+const Login = lazy(() => import("./components/login/login-component"));
+const PasswordReset = lazy(() => import("./components/reset-password/reset-password-component"));
+const SignUp = lazy(() => import("./components/signup/signup-component"));
+const Dashboard = lazy(() => import("./components/my-dashboard/my-dashboard-component"));
+
+// import Login from './components/login/login-component';
+// import PasswordReset from './components/reset-password/reset-password-component';
+// import SignUp from './components/signup/signup-component';
+// import Dashboard from './components/my-dashboard/my-dashboard-component';
 
 
 const App = () => {
   return (
-    <>
+    <Suspense fallback={<Spinner/>}>
       <Router>
         <div className="App">
           <Routes>
@@ -21,7 +28,7 @@ const App = () => {
           </Routes>
         </div>
       </Router>
-    </>
+    </Suspense>
   );
 }
 

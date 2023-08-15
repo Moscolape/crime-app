@@ -1,4 +1,4 @@
-import './reset-password.styles.css';
+import './reset-password-component.styles.css';
 import resetImage from '../../assets/pwd-reset.png';
 
 const PasswordReset = () => {

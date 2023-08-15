@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../login-component/login-component.styles.css';
+import '../login/login-component.styles.css';
 
 const SignUp = () => {
     const [name, setName] = useState('');
@@ -57,7 +57,7 @@ const SignUp = () => {
 
             const data = await response.json();
             console.log("Sign-up Response:", data);
-            
+
             // Clear name, email, and password fields
                 setName('');
                 setEmail('');
