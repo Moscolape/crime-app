@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import '../login/login-component.styles.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 const SignUp = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+
     const [password, setPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -86,9 +92,21 @@ const SignUp = () => {
                             <label htmlFor="email">Email Address:</label><br />
                             <input type="email" name="email" onChange={handleEmail} value={email} id="email" required />
                         </div>
-                        <div>
+                        <div style={{position:'relative'}}>
                             <label htmlFor="password">Password:</label><br />
-                            <input type="password" name="password" onChange={handlePassword} value={password} id="password" required />
+                            <input
+                                type={passwordVisible ? 'text' : 'password'}
+                                name="pwd"
+                                onChange={handlePassword}
+                                value={password}
+                                id="pwd"
+                                required
+                            />
+                            <FontAwesomeIcon
+                                onClick={() => setPasswordVisible(!passwordVisible)}
+                                icon={passwordVisible ? faEyeSlash : faEye}
+                                className="eye-icon"
+                            />
                         </div>
                         <button type="submit" className="btn" disabled={loading}>
                         {loading ? "Signing Up..." : "Sign Up"}

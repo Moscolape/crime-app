@@ -1,13 +1,20 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import Modal from 'react-modal';
 import './login-component.styles.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -95,9 +102,21 @@ const Login = () => {
                             <label htmlFor="email">Email Address:</label><br />
                             <input type="email" name="email" onChange={handleEmail} value={email} id="email" required />
                         </div>
-                        <div>
+                        <div style={{position: 'relative'}}>
                             <label htmlFor="pwd">Password:</label><br />
-                            <input type="password" name="pwd" onChange={handlePassword} value={password} id="pwd" required />
+                            <input
+                                type={passwordVisible ? 'text' : 'password'}
+                                name="pwd"
+                                onChange={handlePassword}
+                                value={password}
+                                id="pwd"
+                                required
+                            />
+                            <FontAwesomeIcon
+                                onClick={() => setPasswordVisible(!passwordVisible)}
+                                icon={passwordVisible ? faEyeSlash : faEye}
+                                className="eye-icon"
+                            />
                         </div>
                         <div className="reset">
                             <span>
