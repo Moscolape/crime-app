@@ -12,7 +12,7 @@ const SideBar = (props) => {
             {user ? (
                 <div>
                     <p>Welcome, <b>{lastName}</b></p>
-                    <button onClick={onLogout}>Logout</button>
+                    <button id='btn-bottom' onClick={onLogout}>Logout</button>
                 </div>
             ) : (
                 <p>Welcome</p>

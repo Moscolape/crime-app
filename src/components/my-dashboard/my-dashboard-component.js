@@ -11,6 +11,7 @@ import SideBar from '../sidebar-component/sidebar-component';
 const Dashboard = () => {
     const [user, setUser] = useState(null);
     const [crimes, setCrimes] = useState(null);
+    // const [allusers, setAllUsers] = useState(null);
 
     const { token } = useContext(TokenContext);
     const [loading, setLoading] = useState(false);
@@ -96,6 +97,37 @@ const Dashboard = () => {
         }); 
     }
 
+    // const getAllUsers = () => {
+    //     setLoading(true);
+
+    //     const apiUrl = "https://crime-analysis-jno2.onrender.com";
+    //     const endpoint = "/api/v1/users";
+    //     const url = apiUrl + endpoint;
+
+    //     fetch(url, {
+    //         method: "GET",
+    //         headers: {
+    //             "Authorization": `Bearer ${token}`,
+    //             "Content-Type": "application/json"
+    //         }
+    //     })
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             setLoading(false);
+    //             throw new Error(`Request failed with status: ${response.status}`);
+    //         }
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         console.log("All Users Info:", data);
+    //         setAllUsers(data);
+    //         setLoading(false);
+    //     })
+    //     .catch(error => {
+    //         console.error("Error:", error);
+    //     }); 
+    // }
+
 
     return (
         <section className='dashboard-page'>
@@ -114,7 +146,7 @@ const Dashboard = () => {
                 </div>
                 <div className='crimes'>
                     <button id='get-crimes' onClick={getAllCrimes} title='Load the crime report'>
-                        {loading ? "Getting all crimes..." : "Check crimes"}
+                        {loading ? "Loading all crimes..." : "Check crimes"}
                     </button>
                     <div>
                         {crimes ? (
@@ -123,10 +155,25 @@ const Dashboard = () => {
                                 <p>There are {crimes.count} crime reports in the provided data.</p>
                             </div>
                         ) : (
-                            <p>No data has been displayed yet.</p>
+                            <p>No data has been displayed yet...</p>
                         )}  
                     </div>
                 </div>
+                {/* <div className='users'>
+                    <button id='get-crimes' onClick={getAllUsers} title='Load the crime report'>
+                        {loading ? "Loading all users..." : "Check all users"}
+                    </button>
+                    <div>
+                        {allusers ? (
+                            <div>
+                                <h2>All Users</h2>
+                                <p>{allusers.msg[0].email}</p>
+                            </div>
+                        ) : (
+                            <p>No user has been displayed yet...</p>
+                        )}  
+                    </div>
+                </div> */}
             </main>
         </section>
     );

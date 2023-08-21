@@ -5,3 +5,17 @@
     position: fixed;
     padding: 0px 10px;
 }
+
+#btn-bottom {
+    position: absolute;
+    bottom: 30px;
+    background: #997BD1;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-family: Poppins;
+    font-size: 14px;
+    width: 90%;
+    cursor: pointer;
+    border-radius: 30px;
+}
