@@ -1,5 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+import TokenContext from '../../contexts/token-context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +19,8 @@ const Login = () => {
     
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const navigate = useNavigate();
+
+    const { setToken } = useContext(TokenContext);
 
 
     const handleEmail = (event) => {
@@ -40,12 +44,6 @@ const Login = () => {
 
         console.log(url);
 
-        const token = "1ee95ab0f114571473f29265eb062e7a7b278d1e48db2c755b88ae18d6ea6974";
-
-        const headers = {
-            "Authorization": `Bearer ${token}`
-        };
-
         // Sample login data
         const loginData = {
             email: email,
@@ -58,7 +56,6 @@ const Login = () => {
         fetch(url, {
             method: "POST",
             headers: {
-                ...headers,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(loginData)
@@ -72,9 +69,16 @@ const Login = () => {
         })
         .then(data => {
             console.log("Login Response:", data);
+            console.log("User Token:", data.token);
+
+            // Get the user's token
+            const token = data.token;
+            setToken(token);
+
             if(data.msg.includes('granted')) {
                 setModalIsOpen(true);
-                // Route to reset page after 5 seconds
+
+                // Route to dashboard page after 5 seconds
                 setTimeout(() => {
                     navigate('/my-dashboard');
                 }, 5000);
@@ -157,9 +161,9 @@ const Login = () => {
                     },
                     content: {
                         position: 'absolute',
-                        top: '35%',
+                        top: '40%',
                         // width: '80%',
-                        bottom: '35%',
+                        bottom: '40%',
                         left: '5%',
                         right: '5%',
                         // height: '15%',

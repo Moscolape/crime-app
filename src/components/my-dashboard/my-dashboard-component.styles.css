@@ -1,0 +1,29 @@
+.dashboard-page {
+    display: flex;
+    position: relative;
+    font-size: 14px;
+}
+
+.main-dashboard {
+    margin-left: 20%;
+}
+
+.user-dashboard {
+    margin: 20px;
+}
+
+.crimes {
+    margin: 20px;
+}
+
+#get-crimes {
+    background: #997BD1;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-family: Poppins;
+    font-size: 14px;
+    width: 200px;
+    cursor: pointer;
+    border-radius: 30px;
+}

@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import TokenContext from '../src/contexts/token-context';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from "react";
 
@@ -11,19 +14,23 @@ const Dashboard = lazy(() => import("./components/my-dashboard/my-dashboard-comp
 
 
 const App = () => {
+  const [token, setToken] = useState(null);
+
   return (
-    <Suspense fallback={<Spinner/>}>
-      <Router>
-        <div className="App">
-          <Routes>
-            <Route exact path="/" element={<Login/>} />
-            <Route path="/reset-password" element={<PasswordReset/>} />
-            <Route path="/sign-up" element={<SignUp/>} />
-            <Route path="/my-dashboard" element={<Dashboard/>} />
-          </Routes>
-        </div>
-      </Router>
-    </Suspense>
+    <TokenContext.Provider value={{ token, setToken }}>
+      <Suspense fallback={<Spinner/>}>
+        <Router>
+          <div className="App">
+            <Routes>
+              <Route exact path="/" element={<Login/>} />
+              <Route path="/reset-password" element={<PasswordReset/>} />
+              <Route path="/sign-up" element={<SignUp/>} />
+              <Route path="/my-dashboard" element={<Dashboard/>} />
+            </Routes>
+          </div>
+        </Router>
+      </Suspense>
+    </TokenContext.Provider>
   );
 }
 
