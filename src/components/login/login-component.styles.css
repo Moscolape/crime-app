@@ -144,6 +144,10 @@ button {
 
 
 @media screen and (max-width: 800px) {
+    .main {
+        height: 100%;
+    }
+
     .circle-section {
         display: none;
     }

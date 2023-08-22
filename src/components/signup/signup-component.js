@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../login/login-component.styles.css';
 
+import { Link } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -113,6 +115,7 @@ const SignUp = () => {
                         </button>
                         {error && <p className="error-message">{error}</p>}
                     </form>
+                    <p><span style={{color:'gray',fontSize: 13}}>Already have an account?</span> <Link to="/" style={{color:'darkblue',fontSize: 13,textDecoration:'none'}}>Log in</Link></p>
                 </section>
                 <section className="circle-section">
                     <h1>CFAS</h1>
