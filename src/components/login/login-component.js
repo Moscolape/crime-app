@@ -81,7 +81,7 @@ const Login = () => {
                 // Route to dashboard page after 5 seconds
                 setTimeout(() => {
                     navigate('/my-dashboard');
-                }, 5000);
+                }, 3000);
             }
             // Clear email and password fields
             setEmail('');
@@ -184,7 +184,7 @@ const Login = () => {
                 ariaHideApp={false}
             >
                 <div className="modal-content">
-                    <p>You have been successfully logged in!! You'd be redirected to your dashboard page in a short moment...</p>
+                    <p>You have been successfully logged in!! You'd be redirected to your dashboard page shortly...</p>
                     {/* <button onClick={() => setModalIsOpen(false)} className="modal-btn">Ok</button> */}
                 </div>
             </Modal>

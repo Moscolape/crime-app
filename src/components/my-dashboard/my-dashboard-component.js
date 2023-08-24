@@ -96,6 +96,7 @@ const Dashboard = () => {
             console.log("Crime Data:", data);
             setCrimes(data);
             setCrimesLoading(false);
+
         })
         .catch(error => {
             console.error("Error:", error);
@@ -157,7 +158,12 @@ const Dashboard = () => {
                         {crimes ? (
                             <div>
                                 <h2>Crime Report</h2>
-                                <p>There are {crimes.count} crime reports in the provided data.</p>
+                                <p>There are {crimes.count} crime reports in the provided data and the major crime events are displayed in a list below;</p>
+                                <ul>
+                                    {[...new Set(crimes.data.map(crimeevent => crimeevent.crime))].map((crimeType, id) => (
+                                    <li key={id}>{crimeType}</li>
+                                    ))}
+                                </ul>
                             </div>
                         ) : (
                             <p>{crimesloading ? "Getting all crime data..." : "No crime data yet."}</p>
@@ -172,9 +178,8 @@ const Dashboard = () => {
                         {allusers ? (
                             <div>
                                 <h2>All Users</h2>
-                                {/* <p>{allusers.msg[0].email}</p> */}
-                                {allusers.msg.map(user => {
-                                    return <li>{user.fullName}</li>
+                                {allusers.msg.map((user, id) => {
+                                    return <li key={id}>{user.fullName}</li>
                                 })}
                             </div>
                         ) : (
