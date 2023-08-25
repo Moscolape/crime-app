@@ -57,10 +57,54 @@ const Dashboard = () => {
         }
     }, [token]);
 
+
+    const getAllUsers = () => {
+        setUserLoading(true);
+
+        const storeAllUser = JSON.parse(localStorage.getItem('all-users'));
+        
+        if (storeAllUser) {
+            setUserLoading(false);
+            setAllUsers(storeAllUser);
+        } else {
+            const apiUrl = "https://crime-analysis-jno2.onrender.com";
+            const endpoint = "/api/v1/users";
+            const url = apiUrl + endpoint;
+    
+            fetch(url, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    setUserLoading(false);
+                    throw new Error(`Request failed with status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("All Users Info:", data);
+                setAllUsers(data);
+                // Store all-user data in localStorage
+                localStorage.setItem('all-users', JSON.stringify(data)); 
+                setUserLoading(false);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            }); 
+        }
+    }
+
+
     const handleLogout = () => {
         // Clear user data from state and localStorage
         setUser(null);
         localStorage.removeItem('user');
+        localStorage.removeItem('all-users');
+        localStorage.removeItem('crime-types');
 
         // Clear browser history
         window.history.replaceState(null, '', '/');
@@ -69,37 +113,6 @@ const Dashboard = () => {
         navigate('/');
     };
 
-
-    const getAllUsers = () => {
-        setUserLoading(true);
-
-        const apiUrl = "https://crime-analysis-jno2.onrender.com";
-        const endpoint = "/api/v1/users";
-        const url = apiUrl + endpoint;
-
-        fetch(url, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                setUserLoading(false);
-                throw new Error(`Request failed with status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("All Users Info:", data);
-            setAllUsers(data);
-            setUserLoading(false);
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        }); 
-    }
 
 
     return (

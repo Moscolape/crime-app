@@ -13,33 +13,44 @@ const CrimeEvents = () => {
     useEffect(() => {
         setCrimesLoading(true);
 
-        const apiUrl = "https://crime-analysis-jno2.onrender.com";
-        const endpoint = "/api/v1/crimes";
-        const url = apiUrl + endpoint;
+        const storeCrimes = JSON.parse(localStorage.getItem('crime-types'));
 
-        fetch(url, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                setCrimesLoading(false);
-                throw new Error(`Request failed with status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Crime Data:", data);
-            setCrimes(data);
+        if (storeCrimes) {
             setCrimesLoading(false);
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        }); 
+            setCrimes(storeCrimes);
+        } else {
+            const apiUrl = "https://crime-analysis-jno2.onrender.com";
+            const endpoint = "/api/v1/crimes";
+            const url = apiUrl + endpoint;
+
+            fetch(url, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    setCrimesLoading(false);
+                    throw new Error(`Request failed with status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Crime Data:", data);
+                setCrimes(data);
+
+                // Store crime types in localStorage
+                localStorage.setItem('crime-types', JSON.stringify(data));
+                setCrimesLoading(false);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            }); 
+        }
     }, [token]);
+
 
     return (
         <div className="crime-types">
@@ -49,14 +60,14 @@ const CrimeEvents = () => {
                     {crimes ? (
                         <div>
                             <select id="crimeTypeSelect">
-                                <option value="">Select crime</option>
+                                <option value="">Choose crime</option>
                                 {[...new Set(crimes.data.map(crimeevent => crimeevent.crime))].map((crimeType, id) => (
                                     <option key={id} value={crimeType}>{crimeType}</option>
                                     ))}
                             </select>
                         </div>
                     ) : (
-                        <p>{crimesloading ? "Getting crime event types..." : "No crime yet."}</p>
+                        <p>{crimesloading ? "Getting crimes..." : "No crime yet."}</p>
                         )}
                 </div>
             </div>
