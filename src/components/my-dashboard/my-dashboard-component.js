@@ -7,15 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import TokenContext from '../../contexts/token-context';
 
 import SideBar from '../sidebar/sidebar-component';
+import CrimeEvents from '../crime-events/crime-events-component';
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
-    const [crimes, setCrimes] = useState(null);
     const [allusers, setAllUsers] = useState(null);
 
     const { token } = useContext(TokenContext);
 
-    const [crimesloading, setCrimesLoading] = useState(false);
     const [userloading, setUserLoading] = useState(false);
 
     const navigate = useNavigate();
@@ -70,38 +69,6 @@ const Dashboard = () => {
         navigate('/');
     };
 
-    const getAllCrimes = () => {
-        setCrimesLoading(true);
-        console.log('Fetch started');
-
-        const apiUrl = "https://crime-analysis-jno2.onrender.com";
-        const endpoint = "/api/v1/crimes";
-        const url = apiUrl + endpoint;
-
-        fetch(url, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                setCrimesLoading(false);
-                throw new Error(`Request failed with status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Crime Data:", data);
-            setCrimes(data);
-            setCrimesLoading(false);
-
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        }); 
-    }
 
     const getAllUsers = () => {
         setUserLoading(true);
@@ -150,26 +117,6 @@ const Dashboard = () => {
                         <p>Dashboard loading...</p>
                     )}
                 </div>
-                <div className='crimes'>
-                    <button id='get-crimes' onClick={getAllCrimes} title='Load the crime report'>
-                        {crimesloading ? "Loading..." : "Check crimes"}
-                    </button>
-                    <div>
-                        {crimes ? (
-                            <div>
-                                <h2>Crime Report</h2>
-                                <p>There are {crimes.count} crime reports in the provided data and the major crime events are displayed in a list below;</p>
-                                <ul>
-                                    {[...new Set(crimes.data.map(crimeevent => crimeevent.crime))].map((crimeType, id) => (
-                                    <li key={id}>{crimeType}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ) : (
-                            <p>{crimesloading ? "Getting all crime data..." : "No crime data yet."}</p>
-                        )}  
-                    </div>
-                </div>
                 <div className='users'>
                     <button id='get-crimes' onClick={getAllUsers} title='Load the crime report'>
                         {userloading ? "Loading..." : "Check all users"}
@@ -188,6 +135,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </main>
+            <CrimeEvents/>
         </section>
     );
 };
