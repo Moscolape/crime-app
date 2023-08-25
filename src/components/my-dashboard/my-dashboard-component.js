@@ -100,18 +100,24 @@ const Dashboard = () => {
 
 
     const handleLogout = () => {
-        // Clear user data from state and localStorage
-        setUser(null);
-        localStorage.removeItem('user');
-        localStorage.removeItem('all-users');
-        localStorage.removeItem('crime-types');
+        // Show a confirmation prompt before logging out
+        const shouldLogout = window.confirm("Are you sure you want to log out?");
+        
+        if (shouldLogout) {
+            // Clear user data from state and localStorage
+            setUser(null);
+            localStorage.removeItem('user');
+            localStorage.removeItem('all-users');
+            localStorage.removeItem('crime-types');
 
-        // Clear browser history
-        window.history.replaceState(null, '', '/');
+            // Clear browser history
+            window.history.replaceState(null, '', '/');
 
-        // Redirect to the login page upon logout
-        navigate('/');
+            // Redirect to the login page upon logout
+            navigate('/');
+        }
     };
+
 
 
 
