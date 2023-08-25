@@ -43,18 +43,24 @@ const CrimeEvents = () => {
 
     return (
         <div className="crime-types">
-            <p><b>Overview of Events</b></p>
-            <div>
-                {crimes ? (
-                    <div>
-                        {[...new Set(crimes.data.map(crimeevent => crimeevent.crime))].map((crimeType, id) => (
-                            <span style={{display:'block'}} key={id}>{crimeType}</span>
-                        ))}
-                    </div>
-                ) : (
-                    <p>{crimesloading ? "Getting crime event types..." : "No crime data yet."}</p>
-                )}  
+            <div className='check-crime-event'>
+                <input type='date' className='crime-date'/>
+                <div>
+                    {crimes ? (
+                        <div>
+                            <select id="crimeTypeSelect">
+                                <option value="">Select crime</option>
+                                {[...new Set(crimes.data.map(crimeevent => crimeevent.crime))].map((crimeType, id) => (
+                                    <option key={id} value={crimeType}>{crimeType}</option>
+                                    ))}
+                            </select>
+                        </div>
+                    ) : (
+                        <p>{crimesloading ? "Getting crime event types..." : "No crime yet."}</p>
+                        )}
+                </div>
             </div>
+            <p><b>Overview of Events</b></p>
         </div>
     );
 }

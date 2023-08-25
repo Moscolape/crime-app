@@ -1,5 +1,16 @@
 .crime-types {
     position: fixed;
-    width: 20%;
+    width: 28%;
     right: 0px;
+    padding: 10px 5px;
+}
+
+.check-crime-event {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.crime-date {
+    height: 30px;
 }
