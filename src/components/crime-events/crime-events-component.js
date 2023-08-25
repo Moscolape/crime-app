@@ -61,9 +61,19 @@ const CrimeEvents = () => {
                         <div>
                             <select id="crimeTypeSelect">
                                 <option value="">Choose crime</option>
-                                {[...new Set(crimes.data.map(crimeevent => crimeevent.crime))].map((crimeType, id) => (
-                                    <option key={id} value={crimeType}>{crimeType}</option>
-                                    ))}
+                                {[...new Set(crimes.data.map(crimeevent => {
+                                // Replace "human" with "human trafficking"
+                                if (crimeevent.crime === "Human") {
+                                    return "Human trafficking";
+                                }
+                                // Replace "others crimes" with "others"
+                                if (crimeevent.crime === "Others crimes") {
+                                    return "Other crimes";
+                                }
+                                return crimeevent.crime;
+                                }))].map((crimeType, id) => (
+                                <option key={id} value={crimeType}>{crimeType}</option>
+                                ))}
                             </select>
                         </div>
                     ) : (
@@ -71,7 +81,7 @@ const CrimeEvents = () => {
                         )}
                 </div>
             </div>
-            <p><b>Overview of Events</b></p>
+            <p style={{color:'#997BD1'}}><b>Overview of Events</b></p>
         </div>
     );
 }

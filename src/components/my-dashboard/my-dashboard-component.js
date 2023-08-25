@@ -122,7 +122,7 @@ const Dashboard = () => {
                 <div className='user-dashboard'>
                     {user ? (
                         <div>
-                            <h2>User Profile</h2>
+                            <h2>USER PROFILE</h2>
                             <p><b>Name:</b> {user.data.fullName}</p>
                             <p><b>Email:</b> {user.data.email}</p>
                         </div>

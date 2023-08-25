@@ -1,6 +1,7 @@
 .crime-types {
     position: fixed;
-    width: 28%;
+    width: 30%;
+    height: 60vh;
     right: 0px;
     padding: 10px;
 }
