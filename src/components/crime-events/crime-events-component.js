@@ -81,7 +81,7 @@ const CrimeEvents = () => {
                         )}
                 </div>
             </div>
-            <p style={{color:'#997BD1'}}><b>Overview of Events</b></p>
+            <p style={{color:'#997BD1'}}><b>Events</b></p>
         </div>
     );
 }

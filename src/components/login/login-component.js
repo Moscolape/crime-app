@@ -144,7 +144,7 @@ const Login = () => {
                     </p>
                     <div className="learn">
                         <div className="span">
-                            <span className="more">Learn More</span>
+                            <span className="more">⇐ Log in to learn more</span>
                         </div>
                     </div>
                 </section>
