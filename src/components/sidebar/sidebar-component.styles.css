@@ -1,7 +1,7 @@
 .sidebar {
     border-right: 0.5px solid #e49376;
     border-bottom: 0.5px solid #e49376;
-    width: 25%;
+    width: 23%;
     height: 60vh;
     position: fixed;
     padding: 10px;
@@ -24,17 +24,18 @@
 
 .side-nav {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .side-nav span {
-    font-size: 10px;
+    font-size: 9px;
 }
 
 #nav-pic {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
+    margin-right: 15px;
 }
 
 .nav-input {

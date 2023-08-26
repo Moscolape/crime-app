@@ -77,7 +77,7 @@ const CrimeEvents = () => {
                             </select>
                         </div>
                     ) : (
-                        <p>{crimesloading ? "Getting crimes..." : "No crime yet."}</p>
+                        <span>{crimesloading ? "Getting crimes..." : "No crime yet."}</span>
                         )}
                 </div>
             </div>
