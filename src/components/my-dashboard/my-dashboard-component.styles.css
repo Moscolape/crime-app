@@ -6,6 +6,12 @@
 
 .main-dashboard {
     margin-left: 23%;
+    width: 45%;
+}
+
+#display {
+    text-align: center;
+    color: #997BD1;
 }
 
 .user-dashboard {

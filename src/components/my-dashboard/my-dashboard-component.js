@@ -8,14 +8,18 @@ import TokenContext from '../../contexts/token-context';
 
 import SideBar from '../sidebar/sidebar-component';
 import CrimeEvents from '../crime-events/crime-events-component';
+import CrimeChart from '../crime-bar-chart/crime-barchart.component';
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
-    const [allusers, setAllUsers] = useState(null);
+    // const [allusers, setAllUsers] = useState(null);
+
+    const [crimes, setCrimes] = useState(null);
+    const [crimesloading, setCrimesLoading] = useState(false);
 
     const { token } = useContext(TokenContext);
 
-    const [userloading, setUserLoading] = useState(false);
+    // const [userloading, setUserLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -57,20 +61,20 @@ const Dashboard = () => {
         }
     }, [token]);
 
+    // Load crime data from localStorage on component mount
+    useEffect(() => {
+        setCrimesLoading(true);
 
-    const getAllUsers = () => {
-        setUserLoading(true);
+        const storeCrimes = JSON.parse(localStorage.getItem('crime-types'));
 
-        const storeAllUser = JSON.parse(localStorage.getItem('all-users'));
-        
-        if (storeAllUser) {
-            setUserLoading(false);
-            setAllUsers(storeAllUser);
+        if (storeCrimes) {
+            setCrimesLoading(false);
+            setCrimes(storeCrimes);
         } else {
             const apiUrl = "https://crime-analysis-jno2.onrender.com";
-            const endpoint = "/api/v1/users";
+            const endpoint = "/api/v1/crimes";
             const url = apiUrl + endpoint;
-    
+
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -80,23 +84,66 @@ const Dashboard = () => {
             })
             .then(response => {
                 if (!response.ok) {
-                    setUserLoading(false);
+                    setCrimesLoading(false);
                     throw new Error(`Request failed with status: ${response.status}`);
                 }
                 return response.json();
             })
-            .then(data => {
-                console.log("All Users Info:", data);
-                setAllUsers(data);
-                // Store all-user data in localStorage
-                localStorage.setItem('all-users', JSON.stringify(data)); 
-                setUserLoading(false);
+            .then(crimedata => {
+                console.log("Crime Data:", crimedata);
+                // const crimeData = data.data;
+                setCrimes(crimedata);
+
+                // Store crime types in localStorage
+                localStorage.setItem('crime-types', JSON.stringify(crimedata));
+                setCrimesLoading(false);
             })
             .catch(error => {
                 console.error("Error:", error);
             }); 
         }
-    }
+    }, [token]);
+
+
+    // const getAllUsers = () => {
+    //     setUserLoading(true);
+
+    //     const storeAllUser = JSON.parse(localStorage.getItem('all-users'));
+        
+    //     if (storeAllUser) {
+    //         setUserLoading(false);
+    //         setAllUsers(storeAllUser);
+    //     } else {
+    //         const apiUrl = "https://crime-analysis-jno2.onrender.com";
+    //         const endpoint = "/api/v1/users";
+    //         const url = apiUrl + endpoint;
+    
+    //         fetch(url, {
+    //             method: "GET",
+    //             headers: {
+    //                 "Authorization": `Bearer ${token}`,
+    //                 "Content-Type": "application/json"
+    //             }
+    //         })
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 setUserLoading(false);
+    //                 throw new Error(`Request failed with status: ${response.status}`);
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             console.log("All Users Info:", data);
+    //             setAllUsers(data);
+    //             // Store all-user data in localStorage
+    //             localStorage.setItem('all-users', JSON.stringify(data)); 
+    //             setUserLoading(false);
+    //         })
+    //         .catch(error => {
+    //             console.error("Error:", error);
+    //         }); 
+    //     }
+    // }
 
 
     const handleLogout = () => {
@@ -118,14 +165,13 @@ const Dashboard = () => {
         }
     };
 
-
-
-
     return (
         <section className='dashboard-page'>
             <SideBar user = {user} onLogout={handleLogout}/>
             <main className='main-dashboard'>
-                <div className='user-dashboard'>
+                <p id='display'>Display of <b>Crimes</b> vs <b>No. of Occurrences</b></p>
+                <CrimeChart crimes = {crimes}/>
+                {/* <div className='user-dashboard'>
                     {user ? (
                         <div>
                             <h2>USER PROFILE</h2>
@@ -135,8 +181,8 @@ const Dashboard = () => {
                     ) : (
                         <p>Dashboard loading...</p>
                     )}
-                </div>
-                <div className='users'>
+                </div> */}
+                {/* <div className='users'>
                     <button id='get-crimes' onClick={getAllUsers} title='Load the crime report'>
                         {userloading ? "Loading..." : "Check all users"}
                     </button>
@@ -152,9 +198,9 @@ const Dashboard = () => {
                             <p>{userloading ? "Getting all user data..." : "No user data yet."}</p>
                         )}  
                     </div>
-                </div>
+                </div> */}
             </main>
-            <CrimeEvents/>
+            <CrimeEvents crimes={crimes} crimesloading = {crimesloading}/>
         </section>
     );
 };
