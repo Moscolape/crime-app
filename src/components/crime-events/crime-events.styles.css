@@ -12,6 +12,37 @@
     align-items: center;
 }
 
-.crime-date {
-    height: 30px;
+.event-overview {
+    height: 94%;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #e49376;
+    overflow-y: scroll;
+}
+
+/* width */
+.event-overview::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.event-overview::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px lightgray; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+.event-overview::-webkit-scrollbar-thumb {
+  background: #997BD1; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.event-overview::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #9f81f1, #e49376); 
+}
+
+.event-overview div {
+    margin-top: 10px;
 }

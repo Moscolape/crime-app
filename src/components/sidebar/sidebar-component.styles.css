@@ -73,7 +73,13 @@
     display: flex;
     align-items: center;
     background: none;
-    /* transition: color 0.3s; */
+}
+
+.nav-menu div:nth-of-type(1) {
+    background: linear-gradient(to right, #9f81f1, #e49376);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 .nav-menu div:hover {
