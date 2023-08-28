@@ -12,6 +12,14 @@
     align-items: center;
 }
 
+#date-message {
+    font-size: 12px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    top: 50px;
+}
+
 .event-overview {
     height: 94%;
     margin-top: 5px;

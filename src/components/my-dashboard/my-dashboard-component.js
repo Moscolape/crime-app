@@ -51,9 +51,11 @@ const Dashboard = () => {
             .then(data => {
                 console.log("User Data:", data);
                 setUser(data);
+                console.log(token);
                 
-                // Store user data in localStorage
+                // Store user data and token in localStorage
                 localStorage.setItem('user', JSON.stringify(data)); 
+                localStorage.setItem('store-token', token);
             })
             .catch(error => {
                 console.error("Error:", error);
@@ -105,47 +107,6 @@ const Dashboard = () => {
     }, [token]);
 
 
-    // const getAllUsers = () => {
-    //     setUserLoading(true);
-
-    //     const storeAllUser = JSON.parse(localStorage.getItem('all-users'));
-        
-    //     if (storeAllUser) {
-    //         setUserLoading(false);
-    //         setAllUsers(storeAllUser);
-    //     } else {
-    //         const apiUrl = "https://crime-analysis-jno2.onrender.com";
-    //         const endpoint = "/api/v1/users";
-    //         const url = apiUrl + endpoint;
-    
-    //         fetch(url, {
-    //             method: "GET",
-    //             headers: {
-    //                 "Authorization": `Bearer ${token}`,
-    //                 "Content-Type": "application/json"
-    //             }
-    //         })
-    //         .then(response => {
-    //             if (!response.ok) {
-    //                 setUserLoading(false);
-    //                 throw new Error(`Request failed with status: ${response.status}`);
-    //             }
-    //             return response.json();
-    //         })
-    //         .then(data => {
-    //             console.log("All Users Info:", data);
-    //             setAllUsers(data);
-    //             // Store all-user data in localStorage
-    //             localStorage.setItem('all-users', JSON.stringify(data)); 
-    //             setUserLoading(false);
-    //         })
-    //         .catch(error => {
-    //             console.error("Error:", error);
-    //         }); 
-    //     }
-    // }
-
-
     const handleLogout = () => {
         // Show a confirmation prompt before logging out
         const shouldLogout = window.confirm("Are you sure you want to log out?");
@@ -156,6 +117,7 @@ const Dashboard = () => {
             localStorage.removeItem('user');
             localStorage.removeItem('all-users');
             localStorage.removeItem('crime-types');
+            localStorage.removeItem('store-token');
 
             // Clear browser history
             window.history.replaceState(null, '', '/');
@@ -171,34 +133,6 @@ const Dashboard = () => {
             <main className='main-dashboard'>
                 <p id='display'>Display of <b>Crimes</b> vs <b>No. of Occurrences</b></p>
                 <CrimeChart crimes = {crimes}/>
-                {/* <div className='user-dashboard'>
-                    {user ? (
-                        <div>
-                            <h2>USER PROFILE</h2>
-                            <p><b>Name:</b> {user.data.fullName}</p>
-                            <p><b>Email:</b> {user.data.email}</p>
-                        </div>
-                    ) : (
-                        <p>Dashboard loading...</p>
-                    )}
-                </div> */}
-                {/* <div className='users'>
-                    <button id='get-crimes' onClick={getAllUsers} title='Load the crime report'>
-                        {userloading ? "Loading..." : "Check all users"}
-                    </button>
-                    <div>
-                        {allusers ? (
-                            <div>
-                                <h2>All Users</h2>
-                                {allusers.msg.map((user, id) => {
-                                    return <li key={id}>{user.fullName}</li>
-                                })}
-                            </div>
-                        ) : (
-                            <p>{userloading ? "Getting all user data..." : "No user data yet."}</p>
-                        )}  
-                    </div>
-                </div> */}
             </main>
             <CrimeEvents crimes={crimes} crimesloading = {crimesloading}/>
         </section>

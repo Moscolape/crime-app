@@ -1,0 +1,60 @@
+.center {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+
+.ring {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    animation: ring 2s linear infinite;
+}
+
+@keyframes ring {
+    0% {
+        transform: rotate(0deg);
+        box-shadow: 1px 5px 2px #e49376;
+    }
+    25% {
+        transform: rotate(90deg);
+        box-shadow: 1px 5px 2px #997BD1;
+    }
+    50% {
+        transform: rotate(180deg);
+        box-shadow: 1px 5px 2px #e49376;
+    }
+    75% {
+        transform: rotate(270deg);
+        box-shadow: 1px 5px 2px #997BD1;
+    }
+    100% {
+        transform: rotate(360deg);
+        box-shadow: 1px 5px 2px #e49376;
+    }
+}
+
+.ring::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(255,255,255,0.3);
+}
+
+#load {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: text 3s ease-in-out linear;
+}
+
+@keyframes text {
+
+}
