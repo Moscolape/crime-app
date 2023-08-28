@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TokenContext from '../src/contexts/token-context';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from "react";
 
 import './App.css';
@@ -25,16 +25,27 @@ const App = () => {
     }
   }, [token]);
 
+  const PrivateRoute = ({ element }) => {
+    const { token } = useContext(TokenContext);
+    return token ? element : <Navigate to="/" />;
+  };
+
   return (
     <TokenContext.Provider value={{ token, setToken }}>
       <Suspense fallback={<Spinner/>}>
         <Router>
           <div className="App">
             <Routes>
-              <Route exact path="/" element={<Login/>} />
-              <Route path="/reset-password" element={<PasswordReset/>} />
-              <Route path="/sign-up" element={<SignUp/>} />
-              <Route path="/my-dashboard" element={<Dashboard/>} />
+              <Route exact path="/" element={<Login />} />
+              <Route
+                path="/reset-password"
+                element={<PrivateRoute path="/reset-password" element={<PasswordReset />} />}
+              />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route
+                path="/my-dashboard"
+                element={<PrivateRoute path="/my-dashboard" element={<Dashboard />} />}
+              />
             </Routes>
           </div>
         </Router>

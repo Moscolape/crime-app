@@ -9,19 +9,25 @@ import TokenContext from '../../contexts/token-context';
 import SideBar from '../sidebar/sidebar-component';
 import CrimeEvents from '../crime-events/crime-events-component';
 import CrimeChart from '../crime-bar-chart/crime-barchart.component';
+import Loader from '../loader/loading-component';
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
-    // const [allusers, setAllUsers] = useState(null);
 
     const [crimes, setCrimes] = useState(null);
     const [crimesloading, setCrimesLoading] = useState(false);
 
     const { token } = useContext(TokenContext);
 
-    // const [userloading, setUserLoading] = useState(false);
 
     const navigate = useNavigate();
+
+    // Check if the user is authenticated, if not, navigate back to login
+    useEffect(() => {
+        if (!token) {
+            navigate('/');
+        }
+    }, [token, navigate]);
 
     // Load user data from localStorage on component mount
     useEffect(() => {
@@ -116,17 +122,17 @@ const Dashboard = () => {
 
 
     const handleLogout = () => {
-    const shouldLogout = window.confirm("Are you sure you want to log out?");
-    
-    if (shouldLogout) {
-        setUser(null);
-        sessionStorage.removeItem('user');
-        localStorage.removeItem('crime-types');
-        localStorage.removeItem('store-token');
+        const shouldLogout = window.confirm("Are you sure you want to log out?");
         
-        window.history.replaceState(null, '', '/');
-        navigate('/');
-    }
+        if (shouldLogout) {
+            setUser(null);
+            sessionStorage.removeItem('user');
+            localStorage.removeItem('crime-types');
+            localStorage.removeItem('store-token');
+            
+            window.history.replaceState(null, '', '/');
+            navigate('/');
+        }
     };
 
     return (
@@ -134,7 +140,7 @@ const Dashboard = () => {
             <SideBar user = {user} onLogout={handleLogout}/>
             <main className='main-dashboard'>
                 <p id='display'>Display of <b>Crimes</b> vs <b>No. of Occurrences</b></p>
-                <CrimeChart crimes = {crimes}/>
+                {crimesloading ? <Loader /> : <CrimeChart crimes={crimes} />}
             </main>
             <CrimeEvents crimes={crimes} crimesloading = {crimesloading}/>
         </section>
