@@ -25,9 +25,9 @@ const Dashboard = () => {
 
     // Load user data from localStorage on component mount
     useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem('user'));
+        const storedUser = JSON.parse(sessionStorage.getItem('user'));
         if (storedUser) {
-            setUser(storedUser);
+        setUser(storedUser);
         }
 
         // Fetch user data and update localStorage when token changes
@@ -62,6 +62,14 @@ const Dashboard = () => {
             });
         }
     }, [token]);
+
+    useEffect(() => {
+        if (user) {
+        sessionStorage.setItem('user', JSON.stringify(user));
+        } else {
+        sessionStorage.removeItem('user');
+        }
+    }, [user]);
 
     // Load crime data from localStorage on component mount
     useEffect(() => {
@@ -108,23 +116,17 @@ const Dashboard = () => {
 
 
     const handleLogout = () => {
-        // Show a confirmation prompt before logging out
-        const shouldLogout = window.confirm("Are you sure you want to log out?");
+    const shouldLogout = window.confirm("Are you sure you want to log out?");
+    
+    if (shouldLogout) {
+        setUser(null);
+        sessionStorage.removeItem('user');
+        localStorage.removeItem('crime-types');
+        localStorage.removeItem('store-token');
         
-        if (shouldLogout) {
-            // Clear user data from state and localStorage
-            setUser(null);
-            localStorage.removeItem('user');
-            localStorage.removeItem('all-users');
-            localStorage.removeItem('crime-types');
-            localStorage.removeItem('store-token');
-
-            // Clear browser history
-            window.history.replaceState(null, '', '/');
-
-            // Redirect to the login page upon logout
-            navigate('/');
-        }
+        window.history.replaceState(null, '', '/');
+        navigate('/');
+    }
     };
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TokenContext from '../src/contexts/token-context';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -14,7 +14,16 @@ const Dashboard = lazy(() => import("./components/my-dashboard/my-dashboard-comp
 
 
 const App = () => {
-  const [token, setToken] = useState(null);
+  const storedToken = sessionStorage.getItem('store-token');
+  const [token, setToken] = useState(storedToken);
+
+  useEffect(() => {
+    if (token) {
+      sessionStorage.setItem('store-token', token);
+    } else {
+      sessionStorage.removeItem('store-token');
+    }
+  }, [token]);
 
   return (
     <TokenContext.Provider value={{ token, setToken }}>
