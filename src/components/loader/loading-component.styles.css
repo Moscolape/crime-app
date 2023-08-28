@@ -8,8 +8,8 @@
 
 .ring {
     position: absolute;
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     animation: ring 2s linear infinite;
 }
@@ -52,9 +52,11 @@
     font-size: 10px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    animation: text 3s ease-in-out linear;
+    animation: text 3s ease-in-out infinite;
 }
 
 @keyframes text {
-
+    50% {
+        color: white;
+    }
 }
