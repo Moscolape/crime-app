@@ -59,17 +59,12 @@
     .crime-types {
       position: relative;
       width: 100%;
-      height: 60vh;
+      height: 50vh;
     }
 
     .check-crime-event {
       margin: 20px 0px;
     }
-
-    /* .crimeTypeSelect {
-      height: 30px;
-      width: 150px;
-    } */
 
     .crime-date, .crimeTypeSelect {
       height: 30px;
