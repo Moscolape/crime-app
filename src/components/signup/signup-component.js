@@ -88,11 +88,11 @@ const SignUp = () => {
                     <form onSubmit={handleSubmit} className="log">
                         <div>
                             <label htmlFor="name">Fullname:</label><br />
-                            <input type="text" name="name" onChange={handleName} value={name} id="name" required />
+                            <input type="text" name="name" onChange={handleName} value={name} id="name" placeholder='John Doe' required />
                         </div>
                         <div>
                             <label htmlFor="email">Email Address:</label><br />
-                            <input type="email" name="email" onChange={handleEmail} value={email} id="email" required />
+                            <input type="email" name="email" onChange={handleEmail} value={email} id="email" placeholder='abc@gmail.com' required />
                         </div>
                         <div style={{position:'relative'}}>
                             <label htmlFor="password">Password:</label><br />
@@ -102,6 +102,7 @@ const SignUp = () => {
                                 onChange={handlePassword}
                                 value={password}
                                 id="pwd"
+                                placeholder='********'
                                 required
                             />
                             <FontAwesomeIcon
