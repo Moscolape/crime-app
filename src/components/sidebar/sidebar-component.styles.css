@@ -92,3 +92,25 @@
 .nav-icon  {
     margin-right: 10px;
 }
+
+@media screen and (max-width: 800px) {
+    .sidebar {
+        width: 90%;
+        height: 70vh;
+        position: fixed;
+        z-index: 100;
+        background: white;
+        transform: translateX(-102%);
+        transition: transform 0.3s ease;
+        border: none;
+        box-shadow: 0 0 5px lightgray;
+    }
+
+    .sidebar-open {
+        transform: translateX(0); /* Slide in from the left when open */
+    }
+
+    .search-icon {
+        left: 15px;
+    }
+}

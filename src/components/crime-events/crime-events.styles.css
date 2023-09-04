@@ -54,3 +54,25 @@
 .event-overview div {
     margin-top: 10px;
 }
+
+@media screen and (max-width: 800px) {
+    .crime-types {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+    }
+
+    .check-crime-event {
+      margin: 20px 0px;
+    }
+
+    /* .crimeTypeSelect {
+      height: 30px;
+      width: 150px;
+    } */
+
+    .crime-date, .crimeTypeSelect {
+      height: 30px;
+      width: 150px;
+    }
+}

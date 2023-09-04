@@ -33,3 +33,51 @@
     cursor: pointer;
     border-radius: 30px;
 }
+
+.Navbar {
+    display: none;
+}
+
+.menu-icon, .logo {
+    margin: 10px 20px;
+    font-size: 20px;
+}
+
+.logo {
+    background-image: linear-gradient(to right, #9f81f1, #e49376);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-color: white;
+}
+
+
+@media screen and (max-width: 800px) {
+    .dashboard-page {
+        flex-direction: column;
+    }
+
+    .main-dashboard {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .Navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 0 5px lightslategray;
+        position: relative;
+    }
+
+    .sidebar {
+        width: 100%;
+        background: white;
+        transform: translateX(-100%); /* Start offscreen to the left */
+        transition: transform 0.3s ease; /* Add a smooth transition effect */
+    }
+
+    .sidebar-open {
+        transform: translateX(0); /* Slide in from the left when open */
+    }
+}

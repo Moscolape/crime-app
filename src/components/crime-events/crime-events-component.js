@@ -99,16 +99,27 @@ const CrimeEvents = ({ crimes, crimesloading }) => {
                         <Loader />
                     ) : (
                         filteredCrimeEvents.length > 0 ? (
-                            filteredCrimeEvents.map((event, index) => (
+                            filteredCrimeEvents.map((event, index) => {
+                                // Parse the event.date string into a Date object
+                                const eventDate = new Date(event.date);
+
+                                // Get the year, month, and day
+                                const year = eventDate.getFullYear();
+                                const month = String(eventDate.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+                                const day = String(eventDate.getDate()).padStart(2, '0');
+
+                                return (
                                 <div key={index}>
-                                    <p><b>{event.geoCode.formattedAddress}</b></p>
+                                    <span><b>{event.geoCode.formattedAddress}</b></span><br />
+                                    <span className='crimedate'>On {`${year}-${month}-${day}`}</span>
                                     <li>{event.crime === "Human" ? "Human trafficking" : event.crime === "Others crimes" ? "Other crimes" : event.crime}</li>
                                 </div>
-                            ))
+                                );
+                            })
                         ) : (
                             <span id='date-message'>
                                 {isCrimeNotFound
-                                    ? `The crime "${selectedCrime}" was not found on this date.`
+                                    ? `The crime "${selectedCrime}" was not found on this date selection.`
                                     : 'Pick a date first, then filter using the select crime options.'
                                 }
                             </span>

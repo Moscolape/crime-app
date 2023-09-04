@@ -14,7 +14,7 @@ const SideBar = (props) => {
     const onLogout = props.onLogout;
 
     return (
-        <div className="sidebar">
+        <div className={`sidebar ${props.sidebarOpen ? 'sidebar-open' : ''}`}>
             {user ? (
                 <div>
                     <div className='side-nav'>

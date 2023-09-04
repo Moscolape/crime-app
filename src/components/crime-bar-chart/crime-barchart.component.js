@@ -50,13 +50,19 @@ const CrimeChart = ({ crimes }) => {
                             type: 'category',
                             title: {
                                 display: true,
-                                text: 'Crimes'
+                                text: 'Crimes',
+                                font: {
+                                    weight: 'bold'
+                                }
                             }
                         },
                         y: {
                             title: {
                                 display: true,
-                                text: 'Number of Occurrences'
+                                text: 'Number of Occurrences',
+                                font: {
+                                    weight: 'bold'
+                                }
                             }
                         }
                     }

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './my-dashboard-component.styles.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -13,12 +15,16 @@ import Loader from '../loader/loading-component';
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const [crimes, setCrimes] = useState(null);
     const [crimesloading, setCrimesLoading] = useState(false);
 
     const { token } = useContext(TokenContext);
 
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen);
+    };
 
     const navigate = useNavigate();
 
@@ -136,14 +142,24 @@ const Dashboard = () => {
     };
 
     return (
-        <section className='dashboard-page'>
-            <SideBar user = {user} onLogout={handleLogout}/>
+        <>
+        <div className={`Navbar ${sidebarOpen ? 'sidebar-open' : ''}`}>
+            <FontAwesomeIcon
+                onClick={toggleSidebar}
+                icon={faBars}
+                className="menu-icon"
+            />
+            <span className='logo'><b>CFAS</b></span>
+        </div>
+        <section className={`dashboard-page ${sidebarOpen ? 'sidebar-open' : ''}`}>
+            <SideBar sidebarOpen = {sidebarOpen} user = {user} onLogout={handleLogout}/>
             <main className='main-dashboard'>
                 <p id='display'>Display of <b>Crimes</b> vs <b>No. of Occurrences</b></p>
                 {crimesloading ? <Loader /> : <CrimeChart crimes={crimes} />}
             </main>
             <CrimeEvents crimes={crimes} crimesloading = {crimesloading}/>
         </section>
+        </>
     );
 };
 
