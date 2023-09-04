@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import './my-dashboard-component.styles.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faClose } from '@fortawesome/free-solid-svg-icons';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -146,7 +146,7 @@ const Dashboard = () => {
         <div className={`Navbar ${sidebarOpen ? 'sidebar-open' : ''}`}>
             <FontAwesomeIcon
                 onClick={toggleSidebar}
-                icon={faBars}
+                icon={sidebarOpen ? faClose : faBars}
                 className="menu-icon"
             />
             <span className='logo'><b>CFAS</b></span>
