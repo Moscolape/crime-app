@@ -95,7 +95,7 @@
 
 @media screen and (max-width: 800px) {
     .sidebar {
-        width: 90%;
+        width: 80%;
         height: 70vh;
         position: fixed;
         z-index: 100;
@@ -103,7 +103,7 @@
         transform: translateX(-102%);
         transition: transform 0.3s ease;
         border: none;
-        box-shadow: 0 0 5px lightgray;
+        box-shadow: 2px 2px 2px rgba(211, 211, 211, 0.671);
     }
 
     .sidebar-open {
