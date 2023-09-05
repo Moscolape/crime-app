@@ -75,6 +75,12 @@ const PieChart = ({ crimes }) => {
     ],
   };
 
+  // Configure chart options to reduce size
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
+
   return (
     <div className='pie'>
       <h3>Enter state to check crime distribution</h3>
@@ -90,7 +96,9 @@ const PieChart = ({ crimes }) => {
       {errorMessage ? (
         <p className="error-message">{errorMessage}</p>
       ) : showPieChart ? (
-        <Pie data={pieData} />
+        <div className='pie-container'>
+            <Pie data={pieData} options={chartOptions}/>
+        </div>
       ) : null}
     </div>
   );

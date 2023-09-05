@@ -2,6 +2,10 @@
     padding: 20px 10px;
 }
 
+.pie-container {
+    height: 350px;
+}
+
 .pie input {
     border: 1px solid black;
     padding-left: 0.3rem;

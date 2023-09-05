@@ -128,7 +128,7 @@ const CrimeEvents = ({ crimes, crimesloading }) => {
                             <span id='date-message'>
                                 {isCrimeNotFound
                                     ? `The crime "${selectedCrime}" was not found on this date selection.`
-                                    : 'Pick a date first, then filter using the select crime options.'
+                                    : 'Select a date which fetches crimes from that day till present, then filter using the select crime options.'
                                 }
                             </span>
                         )
