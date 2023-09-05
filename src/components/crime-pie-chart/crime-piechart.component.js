@@ -81,6 +81,9 @@ const PieChart = ({ crimes }) => {
     maintainAspectRatio: false,
   };
 
+  // Disable the "Show stats" button when the input is empty
+  const isButtonDisabled = filteredState.trim() === '';
+
   return (
     <div className='pie'>
       <h3>Enter state to check crime distribution</h3>
@@ -91,7 +94,9 @@ const PieChart = ({ crimes }) => {
           value={filteredState}
           onChange={(e) => setFilteredState(e.target.value)}
         />
-        <button onClick={handleFilter}>Show stats</button>
+        <button onClick={handleFilter} disabled={isButtonDisabled}>
+          Show stats
+        </button>
       </div>
       {errorMessage ? (
         <p className="error-message">{errorMessage}</p>
