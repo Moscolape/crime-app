@@ -69,6 +69,11 @@
         flex-direction: column;
     }
 
+    .pie {
+        border-top: 1px solid #e49376;
+        border-bottom: 1px solid #e49376;
+    }
+
     .main-dashboard {
         width: 100%;
         margin-left: 0;

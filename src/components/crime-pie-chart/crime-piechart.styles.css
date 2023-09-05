@@ -1,0 +1,13 @@
+.pie {
+    padding: 20px 10px;
+}
+
+.pie button {
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.error-message {
+    text-align: center;
+    font-size: 12px;
+}

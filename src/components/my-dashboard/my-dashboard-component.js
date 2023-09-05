@@ -12,6 +12,7 @@ import SideBar from '../sidebar/sidebar-component';
 import CrimeEvents from '../crime-events/crime-events-component';
 import CrimeChart from '../crime-bar-chart/crime-barchart.component';
 import Loader from '../loader/loading-component';
+import PieChart from '../crime-pie-chart/crime-piechart.component';
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
@@ -159,6 +160,7 @@ const Dashboard = () => {
             <main className='main-dashboard'>
                 <p id='display'>Display of <b>Crimes</b> vs <b>No. of Occurrences</b></p>
                 {crimesloading ? <Loader /> : <CrimeChart crimes={crimes} />}
+                {crimes && <PieChart crimes={crimes} className="pie" />}
             </main>
             <CrimeEvents crimes={crimes} crimesloading = {crimesloading}/>
         </section>
