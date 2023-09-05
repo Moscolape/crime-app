@@ -134,7 +134,7 @@ const CrimeEvents = ({ crimes, crimesloading }) => {
                         )
                     )}
                 </div>
-            </div>
+            </div><br/>
         </div>
     );
 }

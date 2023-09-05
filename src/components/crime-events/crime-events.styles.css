@@ -4,7 +4,6 @@
     height: 60vh;
     right: 0px;
     padding: 10px;
-    margin-bottom: 30px;
 }
 
 .check-crime-event {
@@ -24,6 +23,7 @@
 .event-overview {
     height: 94%;
     margin-top: 5px;
+    margin-bottom: 30px;
     padding: 5px;
     border-radius: 3px;
     border: 1px solid #e49376;
