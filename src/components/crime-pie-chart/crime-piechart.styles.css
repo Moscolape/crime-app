@@ -2,6 +2,12 @@
     padding: 20px 10px;
 }
 
+.pie input {
+    border: 1px solid black;
+    padding-left: 0.3rem;
+    outline: none;
+}
+
 .pie button {
     margin-left: 1rem;
     cursor: pointer;
@@ -9,5 +15,5 @@
 
 .error-message {
     text-align: center;
-    font-size: 12px;
+    font-size: 0.75rem;
 }

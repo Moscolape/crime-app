@@ -2,7 +2,7 @@ import React from 'react';
 import './sidebar-component.styles.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faHome, faNewspaper, faBell, faGear, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faHome, faNewspaper, faBell, faGear, faChartLine, faSignOut } from '@fortawesome/free-solid-svg-icons';
 
 
 import navImage from '../../assets/user.png';
@@ -46,7 +46,7 @@ const SideBar = (props) => {
                             <FontAwesomeIcon icon={faGear} className='nav-icon'/> <span>Settings</span>
                         </div>
                     </div>
-                    <button id='btn-bottom' onClick={onLogout} title='Log out'>Logout</button>
+                    <button id='btn-bottom' onClick={onLogout} title='Log out'>Logout <FontAwesomeIcon className='sign-out' icon={faSignOut}/></button>
                 </div>
             ) : (
                 <p>Loading user...</p>

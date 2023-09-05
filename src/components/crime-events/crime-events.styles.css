@@ -71,5 +71,6 @@
     .crime-date, .crimeTypeSelect {
       height: 30px;
       width: 150px;
+      border: 1px solid black;
     }
 }
