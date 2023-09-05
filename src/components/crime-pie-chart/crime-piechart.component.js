@@ -26,7 +26,7 @@ const PieChart = ({ crimes }) => {
   const handleFilter = () => {
     // Filter the data based on the entered state
     const filtered = crimes.data.filter(entry =>
-      entry.state.toLowerCase().includes(filteredState.toLowerCase())
+      entry.state.toLowerCase() === filteredState.toLowerCase()
     );
 
     if (filtered.length === 0) {
