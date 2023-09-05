@@ -95,7 +95,7 @@
 
 @media screen and (max-width: 800px) {
     .sidebar {
-        width: 80%;
+        width: 85%;
         height: 70vh;
         position: fixed;
         z-index: 100;

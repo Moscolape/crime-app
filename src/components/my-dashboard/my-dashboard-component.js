@@ -151,7 +151,10 @@ const Dashboard = () => {
             />
             <span className='logo'><b>CFAS</b></span>
         </div>
-        <section className={`dashboard-page ${sidebarOpen ? 'sidebar-open' : ''}`}>
+        <section 
+            className={
+                `dashboard-page ${sidebarOpen ? 'sidebar-open' : ''} ${sidebarOpen ? 'overlay' : ''}`
+            }>
             <SideBar sidebarOpen = {sidebarOpen} user = {user} onLogout={handleLogout}/>
             <main className='main-dashboard'>
                 <p id='display'>Display of <b>Crimes</b> vs <b>No. of Occurrences</b></p>

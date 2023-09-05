@@ -52,7 +52,8 @@ const CrimeChart = ({ crimes }) => {
                                 display: true,
                                 text: 'Crimes',
                                 font: {
-                                    weight: 'bold'
+                                    weight: 'bold',
+                                    size: '16px'
                                 }
                             }
                         },
@@ -61,7 +62,8 @@ const CrimeChart = ({ crimes }) => {
                                 display: true,
                                 text: 'Number of Occurrences',
                                 font: {
-                                    weight: 'bold'
+                                    weight: 'bold',
+                                    size: '16px'
                                 }
                             }
                         }
