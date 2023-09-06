@@ -10,6 +10,7 @@
     border: 1px solid black;
     padding-left: 0.3rem;
     outline: none;
+    width: 150px;
 }
 
 .pie button {
