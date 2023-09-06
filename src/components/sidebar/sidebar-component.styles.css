@@ -17,13 +17,15 @@
     padding: 5px;
     font-family: Poppins;
     font-size: 12px;
-    width: 35%;
+    width: 40%;
+    text-align: left;
+    padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .sign-out {
-    padding-left: 10px;
+    padding-right: 1rem;
 }
 
 .side-nav {

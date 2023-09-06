@@ -98,3 +98,9 @@
         transform: translateX(0); /* Slide in from the left when open */
     }
 }
+
+@media screen and (max-width: 300px) {
+    #display {
+        font-size: 0.8rem;
+    }
+}

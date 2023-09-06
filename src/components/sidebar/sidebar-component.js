@@ -46,7 +46,7 @@ const SideBar = (props) => {
                             <FontAwesomeIcon icon={faGear} className='nav-icon'/> <span>Settings</span>
                         </div>
                     </div>
-                    <button id='btn-bottom' onClick={onLogout} title='Log out'>Logout <FontAwesomeIcon className='sign-out' icon={faSignOut}/></button>
+                    <button id='btn-bottom' onClick={onLogout} title='Log out'><FontAwesomeIcon className='sign-out' icon={faSignOut}/> Logout</button>
                 </div>
             ) : (
                 <p>Loading user...</p>

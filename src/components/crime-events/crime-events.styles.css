@@ -68,9 +68,15 @@
       margin: 20px 0px;
     }
 
-    .crime-date, .crimeTypeSelect {
+    .crime-date, #crimeTypeSelect {
       height: 30px;
       width: 150px;
       border: 1px solid black;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .crime-date, #crimeTypeSelect {
+      width: 125px;
     }
 }

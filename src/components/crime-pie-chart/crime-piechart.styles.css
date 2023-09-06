@@ -22,3 +22,13 @@
     text-align: center;
     font-size: 0.75rem;
 }
+
+@media screen and (max-width: 300px) {
+    .pie input {
+        width: 150px;
+    }
+
+    .pie h3 {
+        font-size: 0.8rem;
+    }
+}
