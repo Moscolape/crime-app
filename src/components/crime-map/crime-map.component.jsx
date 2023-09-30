@@ -37,8 +37,8 @@ const CrimeMap = ({ crimes }) => {
             <Popup>
               <div>
                 <h3>Crime Type: {crime.crime}</h3>
-                <p>Date: {new Date(crime.date).toLocaleDateString()}</p>
-                <p>Location: {crime.geoCode.formattedAddress}</p>
+                <p><b>Date:</b> {new Date(crime.date).toLocaleDateString()}</p>
+                <p><b>Location:</b> {crime.geoCode.formattedAddress}</p>
               </div>
             </Popup>
           </Marker>
