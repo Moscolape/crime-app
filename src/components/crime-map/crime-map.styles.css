@@ -1,5 +1,7 @@
 .map {
   margin: 20px 10px;
+  width: 100%;
+  height: 28rem;
 }
 
 .load-map {
