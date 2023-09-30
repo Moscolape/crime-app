@@ -4,10 +4,10 @@ import { Pie } from 'react-chartjs-2';
 import './crime-piechart.styles.css';
 
 const PieChart = ({ crimes }) => {
-  const [filteredState, setFilteredState] = useState(''); // State for user input
-  const [filteredData, setFilteredData] = useState(crimes.data); // State to store filtered data
-  const [errorMessage, setErrorMessage] = useState(null); // State for error message
-  const [showPieChart, setShowPieChart] = useState(false); // State to control pie chart visibility
+  const [filteredState, setFilteredState] = useState('');
+  const [filteredData, setFilteredData] = useState(crimes.data);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [showPieChart, setShowPieChart] = useState(false);
 
   useEffect(() => {
     // Check if crimes data is available and set filtered data initially
@@ -75,6 +75,9 @@ const PieChart = ({ crimes }) => {
     ],
   };
 
+  const totalCrimes = crimeData.reduce((sum, count) => sum + count, 0);
+  const crimePercentages = crimeData.map(count => ((count / totalCrimes) * 100).toFixed(2));
+
   // Configure chart options to reduce size
   const chartOptions = {
     responsive: true,
@@ -97,12 +100,24 @@ const PieChart = ({ crimes }) => {
         <button onClick={handleFilter} disabled={isButtonDisabled}>
           Show stats
         </button>
+        {showPieChart ? (
+          <div className="percentage-table">
+            <h4>Crime Percentages:</h4>
+            <ul className='percentage-list'>
+              {crimeLabels.map((label, index) => (
+                <li key={index} className='list-item'>
+                  {label}: <b>{crimePercentages[index]}%</b>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
       {errorMessage ? (
         <p className="error-message">{errorMessage}</p>
       ) : showPieChart ? (
         <div className='pie-container'>
-            <Pie data={pieData} options={chartOptions}/>
+          <Pie data={pieData} options={chartOptions}/>
         </div>
       ) : null}
     </div>

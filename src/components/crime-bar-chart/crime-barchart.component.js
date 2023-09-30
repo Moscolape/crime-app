@@ -55,7 +55,10 @@ const CrimeChart = ({ crimes }) => {
                                     weight: 'bold',
                                     size: '16px'
                                 }
-                            }
+                            },
+                            grid: {
+                                display: false,
+                            },
                         },
                         y: {
                             title: {

@@ -23,6 +23,19 @@
     font-size: 0.75rem;
 }
 
+.percentage-table {
+    display: flex;
+}
+
+.percentage-list {
+    margin-top: 20px;
+    list-style-type: none;
+}
+
+.list-item {
+    margin-bottom: 10px;
+}
+
 @media screen and (max-width: 300px) {
     .pie input {
         width: 150px;
@@ -30,5 +43,9 @@
 
     .pie h3 {
         font-size: 0.8rem;
+    }
+
+    .percentage-table {
+        flex-direction: column;
     }
 }
