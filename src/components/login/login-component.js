@@ -135,12 +135,12 @@ const Login = () => {
                         </button>
                         {error && <p className="error-message">{error}</p>}
                     </form>
-                    <p><span style={{color:'gray',fontSize: 13}}>Don't have an account?</span> <Link to="/sign-up" style={{color:'darkblue',fontSize: 13,textDecoration:'none'}}>Sign up</Link></p>
+                    {/* <p><span style={{color:'gray',fontSize: 13}}>Don't have an account?</span> <Link to="/sign-up" style={{color:'darkblue',fontSize: 13,textDecoration:'none'}}>Sign up</Link></p> */}
                 </section>
                 <section className="circle-section">
                     <h1>CFAS</h1>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora modi sapiente vero facilis beatae animi quam debitis quas atque voluptates porro esse nulla ad aperiam.
+                        CFAS is a crime forecasting and analysis system built to aid security agencies in carrying out their responsibilities in a more timely manner to enhance security. It uses an AI prediction algorithm based on crime datasets of past criminal activities.
                     </p>
                     <div className="learn">
                         <div className="span">

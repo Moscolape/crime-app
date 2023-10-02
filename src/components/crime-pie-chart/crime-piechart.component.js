@@ -76,7 +76,7 @@ const PieChart = ({ crimes }) => {
   };
 
   const totalCrimes = crimeData.reduce((sum, count) => sum + count, 0);
-  const crimePercentages = crimeData.map(count => ((count / totalCrimes) * 100).toFixed(0));
+  const crimePercentages = crimeData.map(count => ((count / totalCrimes) * 100).toFixed(1));
 
   // Configure chart options to reduce size
   const chartOptions = {
