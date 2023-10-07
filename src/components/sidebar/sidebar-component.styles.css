@@ -73,26 +73,28 @@
     margin: 0px 10px;
 }
 
+.nav-menu a {
+  text-decoration: none;
+  color: #333;
+}
+
+.nav-menu div.active {
+  background: linear-gradient(to right, #9f81f1, #e49376);
+  color: white;
+}
+
 .nav-menu div {
     margin: 5px 0px;
     padding: 5px 10px;
     display: flex;
     align-items: center;
-    background: none;
-}
-
-.nav-menu div:nth-of-type(1) {
-    background: linear-gradient(to right, #9f81f1, #e49376);
-    color: white;
-    cursor: pointer;
     border-radius: 5px;
 }
 
 .nav-menu div:hover {
     background: linear-gradient(to right, #9f81f1, #e49376);
-    color: white;
     cursor: pointer;
-    border-radius: 5px;
+    color: white;
 }
 
 .nav-icon  {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import TokenContext from '../src/contexts/token-context';
+import { CrimesProvider } from './contexts/crime-data-context';
 
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from "react";
@@ -32,6 +33,7 @@ const App = () => {
 
   return (
     <TokenContext.Provider value={{ token, setToken }}>
+      <CrimesProvider>
       <Suspense fallback={<Spinner/>}>
         <Router>
           <div className="App">
@@ -43,13 +45,14 @@ const App = () => {
               />
               <Route path="/sign-up" element={<SignUp />} />
               <Route
-                path="/my-dashboard"
-                element={<PrivateRoute path="/my-dashboard" element={<Dashboard />} />}
+                path="/dashboard"
+                element={<PrivateRoute path="/dashboard" element={<Dashboard />} />}
               />
             </Routes>
           </div>
         </Router>
       </Suspense>
+      </CrimesProvider>
     </TokenContext.Provider>
   );
 }

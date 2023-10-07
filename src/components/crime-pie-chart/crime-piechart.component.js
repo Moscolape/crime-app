@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
+import { useCrimesContext } from '../../contexts/crime-data-context';
+
 
 import './crime-piechart.styles.css';
 
-const PieChart = ({ crimes }) => {
+const PieChart = () => {
+  const { crimes } = useCrimesContext();
   const [filteredState, setFilteredState] = useState('');
   const [filteredData, setFilteredData] = useState(crimes.data);
   const [errorMessage, setErrorMessage] = useState(null);
   const [showPieChart, setShowPieChart] = useState(false);
+
 
   useEffect(() => {
     // Check if crimes data is available and set filtered data initially

@@ -80,7 +80,7 @@ const Login = () => {
 
                 // Route to dashboard page after 5 seconds
                 setTimeout(() => {
-                    navigate('/my-dashboard');
+                    navigate('/dashboard');
                 }, 3000);
             }
             // Clear email and password fields

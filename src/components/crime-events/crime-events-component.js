@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './crime-events.styles.css';
+import { useCrimesContext } from '../../contexts/crime-data-context';
 
 import Loader from '../loader/loading-component';
 
-const CrimeEvents = ({ crimes, crimesloading }) => {
+
+const CrimeEvents = () => {
+    const { crimes, loading } = useCrimesContext();
     const [selectedCrime, setSelectedCrime] = useState('');
     const [crimeEvents, setCrimeEvents] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -91,8 +94,8 @@ const CrimeEvents = ({ crimes, crimesloading }) => {
                             </select>
                         </div>
                     ) : (
-                            <span>{crimesloading ? "Getting crimes..." : "No crime yet."}</span>
-                        )}
+                        <span>{loading ? "Getting crimes..." : "No crime yet."}</span>
+                    )}
                 </div>
             </div>
             <div className='event-overview'>

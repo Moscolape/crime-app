@@ -7,6 +7,7 @@ import { faBars, faClose } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 import TokenContext from '../../contexts/token-context';
+import { useCrimesContext } from '../../contexts/crime-data-context';
 
 import SideBar from '../sidebar/sidebar-component';
 import CrimeEvents from '../crime-events/crime-events-component';
@@ -19,8 +20,7 @@ const Dashboard = () => {
     const [user, setUser] = useState(null);
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    const [crimes, setCrimes] = useState(null);
-    const [crimesloading, setCrimesLoading] = useState(false);
+    const { crimes, loading } = useCrimesContext();
 
     const { token } = useContext(TokenContext);
 
@@ -85,49 +85,6 @@ const Dashboard = () => {
         }
     }, [user]);
 
-    // Load crime data from localStorage on component mount
-    useEffect(() => {
-        setCrimesLoading(true);
-
-        const storeCrimes = JSON.parse(sessionStorage.getItem('crime-types'));
-
-        if (storeCrimes) {
-            console.log(storeCrimes);
-            setCrimes(storeCrimes);
-            setCrimesLoading(false);
-        } else {
-            const apiUrl = "https://crime-analysis-jno2.onrender.com";
-            const endpoint = "/api/v1/crimes";
-            const url = apiUrl + endpoint;
-
-            fetch(url, {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Request failed with status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(crimedata => {
-                console.log("Crime Data:", crimedata);
-                setCrimes(crimedata);
-
-                // Store crime types in localStorage
-                sessionStorage.setItem('crime-types', JSON.stringify(crimedata));
-                setCrimesLoading(false);
-            })
-            .catch(error => {
-                console.error("Fetch Error:", error);
-                setCrimesLoading(false);
-            }); 
-        }
-    }, [token]);
-
 
     const handleLogout = () => {
         const shouldLogout = window.confirm("Are you sure you want to log out?");
@@ -160,11 +117,11 @@ const Dashboard = () => {
             <SideBar sidebarOpen = {sidebarOpen} user = {user} onLogout={handleLogout}/>
             <main className='main-dashboard'>
                 <p id='display'>Display of <b>Crimes</b> vs <b>No. of Occurrences</b></p>
-                {crimesloading ? <Loader /> : <CrimeChart crimes={crimes} />}
-                {crimes && <PieChart crimes={crimes} className="pie" />}
-                <CrimeMap crimes = {crimes}/>
+                {loading ? <Loader /> : <CrimeChart />}
+                {crimes && <PieChart className="pie" />}
+                <CrimeMap />
             </main>
-            <CrimeEvents crimes={crimes} crimesloading = {crimesloading}/>
+            <CrimeEvents crimes={crimes} crimesloading = {loading}/>
         </section>
         </>
     );

@@ -1,17 +1,20 @@
 import React from 'react';
 import './sidebar-component.styles.css';
+import { Link, useLocation } from 'react-router-dom';
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faHome, faNewspaper, faBell, faGear, faChartLine, faSignOut } from '@fortawesome/free-solid-svg-icons';
 
-
 import navImage from '../../assets/user.png';
+
 
 const SideBar = (props) => {
     const user = props.user;
     const lastName = user && user.data.fullName.split(' ').pop();
 
     const onLogout = props.onLogout;
+    const location = useLocation();
 
     return (
         <div className={`sidebar ${props.sidebarOpen ? 'sidebar-open' : ''}`}>
@@ -30,21 +33,36 @@ const SideBar = (props) => {
                     </div>
                     <div className='nav-menu'>
                         <p style={{color: '#997BD1', fontWeight: 'bold'}}>Menu</p>
-                        <div>
-                            <FontAwesomeIcon icon={faHome} className='nav-icon'/> <span>Home</span>
-                        </div>
-                        <div>
-                            <FontAwesomeIcon icon={faNewspaper} className='nav-icon'/> <span>News Reports</span>
-                        </div>
-                        <div>
-                            <FontAwesomeIcon icon={faChartLine} className='nav-icon'/> <span>Context Analysis</span>
-                        </div>
-                        <div>
-                            <FontAwesomeIcon icon={faBell} className='nav-icon'/> <span>Notifications</span>
-                        </div>
-                        <div>
-                            <FontAwesomeIcon icon={faGear} className='nav-icon'/> <span>Settings</span>
-                        </div>
+                        <Link to="/dashboard">
+                            <div className={location.pathname === '/dashboard' ? 'active' : ''}>
+                                <FontAwesomeIcon icon={faHome} className='nav-icon'/>
+                                <span>Home</span>
+                            </div>
+                        </Link>
+                        <Link to="">
+                            <div>
+                                <FontAwesomeIcon icon={faNewspaper} className='nav-icon'/>
+                                <span>News Reports</span>
+                            </div>
+                        </Link>
+                        <Link to="">
+                            <div>
+                                <FontAwesomeIcon icon={faChartLine} className='nav-icon'/>
+                                <span>Context Analysis</span>
+                            </div>
+                        </Link>
+                        <Link to="">
+                            <div>
+                                <FontAwesomeIcon icon={faBell} className='nav-icon'/>
+                                <span>Notifications</span>
+                            </div>
+                        </Link>
+                        <Link to="">
+                            <div>
+                                <FontAwesomeIcon icon={faGear} className='nav-icon'/>
+                                <span>Settings</span>
+                            </div>
+                        </Link>
                     </div>
                     <button id='btn-bottom' onClick={onLogout} title='Log out'><FontAwesomeIcon className='sign-out' icon={faSignOut}/> Logout</button>
                 </div>
