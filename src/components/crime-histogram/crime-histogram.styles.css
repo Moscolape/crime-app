@@ -1,0 +1,18 @@
+.histogram-chart {
+  height: 60vh;
+}
+
+.histogram {
+  margin: 10px;
+}
+
+.filter-container select {
+  width: 10rem;
+  height: 2rem;
+  outline: none;
+}
+
+.filter-container button {
+  margin-left: 2rem;
+  cursor: pointer;
+}

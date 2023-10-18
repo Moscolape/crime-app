@@ -45,8 +45,8 @@ const SideBar = (props) => {
                                 <span>News Reports</span>
                             </div>
                         </Link>
-                        <Link to="">
-                            <div>
+                        <Link to="/context-analysis">
+                            <div className={location.pathname === '/context-analysis' ? 'active' : ''}>
                                 <FontAwesomeIcon icon={faChartLine} className='nav-icon'/>
                                 <span>Context Analysis</span>
                             </div>

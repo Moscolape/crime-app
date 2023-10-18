@@ -2,6 +2,10 @@
     padding: 20px 10px;
 }
 
+h1 {
+    margin-top: 2rem;
+}
+
 .pie-container {
     height: 350px;
 }

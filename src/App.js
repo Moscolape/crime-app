@@ -11,7 +11,8 @@ import Spinner from './components/spinner/spinner-component';
 const Login = lazy(() => import("./components/login/login-component"));
 const PasswordReset = lazy(() => import("./components/reset-password/reset-password-component"));
 const SignUp = lazy(() => import("./components/signup/signup-component"));
-const Dashboard = lazy(() => import("./components/my-dashboard/my-dashboard-component"));
+const DashboardVisuals = lazy(() => import("./pages/dashboard-visuals/dashboard-visuals"));
+const ContextAnalysis = lazy(() => import("./pages/context-analysis/context-analysis"));
 
 
 const App = () => {
@@ -46,7 +47,11 @@ const App = () => {
               <Route path="/sign-up" element={<SignUp />} />
               <Route
                 path="/dashboard"
-                element={<PrivateRoute path="/dashboard" element={<Dashboard />} />}
+                element={<PrivateRoute path="/dashboard" element={<DashboardVisuals />} />}
+              />
+              <Route
+                path="/context-analysis"
+                element={<PrivateRoute path="/context-analysis" element={<ContextAnalysis />} />}
               />
             </Routes>
           </div>

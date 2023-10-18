@@ -1,0 +1,21 @@
+.general {
+  margin: 10px;
+}
+
+.context {
+  width: 100%;
+  height: 7rem;
+  resize: none;
+  padding: 0.5rem;
+  outline: none;
+}
+
+.analyse {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background: linear-gradient(to right, #e49376, #9f81f1);
+  color: white;
+  border: none;
+  border-radius: 6px;
+}

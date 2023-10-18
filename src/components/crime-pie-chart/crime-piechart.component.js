@@ -11,6 +11,7 @@ const PieChart = () => {
   const [filteredData, setFilteredData] = useState(crimes.data);
   const [errorMessage, setErrorMessage] = useState(null);
   const [showPieChart, setShowPieChart] = useState(false);
+  const [displayedState, setDisplayedState] = useState('');
 
 
   useEffect(() => {
@@ -39,11 +40,13 @@ const PieChart = () => {
       );
       setShowPieChart(false); // Hide pie chart if there's an error
     } else {
+      setDisplayedState(filteredState);
       setErrorMessage(null);
       setShowPieChart(true); // Show pie chart if there's no error
     }
 
     setFilteredData(filtered);
+    setFilteredState('');
   };
 
   const crimeCounts = filteredData.reduce((counts, entry) => {
@@ -105,16 +108,19 @@ const PieChart = () => {
           Show stats
         </button>
         {showPieChart ? (
-          <div className="percentage-table">
-            <h4>Crime Percentages:</h4>
-            <ul className='percentage-list'>
-              {crimeLabels.map((label, index) => (
-                <li key={index} className='list-item'>
-                  {label}: <b>{crimePercentages[index]}%</b>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <>
+            <h1>{displayedState.toUpperCase() + `${displayedState.toLowerCase().includes('abuja') ? '' : ' STATE'}`}</h1>
+            <div className="percentage-table">
+              <h4>Crime Percentages:</h4>
+              <ul className='percentage-list'>
+                {crimeLabels.map((label, index) => (
+                  <li key={index} className='list-item'>
+                    {label}: <b>{crimePercentages[index]}%</b>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
         ) : null}
       </div>
       {errorMessage ? (

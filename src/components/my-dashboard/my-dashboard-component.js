@@ -11,12 +11,9 @@ import { useCrimesContext } from '../../contexts/crime-data-context';
 
 import SideBar from '../sidebar/sidebar-component';
 import CrimeEvents from '../crime-events/crime-events-component';
-import CrimeChart from '../crime-bar-chart/crime-barchart.component';
-import Loader from '../loader/loading-component';
-import PieChart from '../crime-pie-chart/crime-piechart.component';
-import CrimeMap from '../crime-map/crime-map.component';
 
-const Dashboard = () => {
+
+const Dashboard = ({children}) => {
     const [user, setUser] = useState(null);
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -102,27 +99,24 @@ const Dashboard = () => {
 
     return (
         <>
-        <div className={`Navbar ${sidebarOpen ? 'sidebar-open' : ''}`}>
-            <FontAwesomeIcon
-                onClick={toggleSidebar}
-                icon={sidebarOpen ? faClose : faBars}
-                className="menu-icon"
-            />
-            <span className='logo'><b>CFAS</b></span>
-        </div>
-        <section 
-            className={
-                `dashboard-page ${sidebarOpen ? 'sidebar-open' : ''} ${sidebarOpen ? 'overlay' : ''}`
-            }>
-            <SideBar sidebarOpen = {sidebarOpen} user = {user} onLogout={handleLogout}/>
-            <main className='main-dashboard'>
-                <p id='display'>Display of <b>Crimes</b> vs <b>No. of Occurrences</b></p>
-                {loading ? <Loader /> : <CrimeChart />}
-                {crimes && <PieChart className="pie" />}
-                <CrimeMap />
-            </main>
-            <CrimeEvents crimes={crimes} crimesloading = {loading}/>
-        </section>
+            <div className={`Navbar ${sidebarOpen ? 'sidebar-open' : ''}`}>
+                <FontAwesomeIcon
+                    onClick={toggleSidebar}
+                    icon={sidebarOpen ? faClose : faBars}
+                    className="menu-icon"
+                />
+                <span className='logo'><b>CFAS</b></span>
+            </div>
+            <section 
+                className={
+                    `dashboard-page ${sidebarOpen ? 'sidebar-open' : ''} ${sidebarOpen ? 'overlay' : ''}`
+                }>
+                <SideBar sidebarOpen = {sidebarOpen} user = {user} onLogout={handleLogout}/>
+                <div className='main-dashboard'>
+                    {children}
+                </div>
+                <CrimeEvents crimes={crimes} crimesloading = {loading}/>
+            </section>
         </>
     );
 };
