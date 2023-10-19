@@ -7,17 +7,22 @@ import { faBars, faClose } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 import TokenContext from '../../contexts/token-context';
-import { useCrimesContext } from '../../contexts/crime-data-context';
 
 import SideBar from '../sidebar/sidebar-component';
+import { useCrimesContext } from '../../contexts/crime-data-context';
+
+import { useLocation } from 'react-router-dom';
+
 import CrimeEvents from '../crime-events/crime-events-component';
+
 
 
 const Dashboard = ({children}) => {
     const [user, setUser] = useState(null);
     const [sidebarOpen, setSidebarOpen] = useState(false);
-
     const { crimes, loading } = useCrimesContext();
+    const location = useLocation();
+
 
     const { token } = useContext(TokenContext);
 
@@ -115,7 +120,9 @@ const Dashboard = ({children}) => {
                 <div className='main-dashboard'>
                     {children}
                 </div>
-                <CrimeEvents crimes={crimes} crimesloading = {loading}/>
+                {location.pathname !== '/context-analysis' && (
+                    <CrimeEvents crimes={crimes} crimesloading = {loading}/>
+                )}
             </section>
         </>
     );

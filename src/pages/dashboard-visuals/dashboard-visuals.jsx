@@ -8,13 +8,14 @@ import { useCrimesContext } from '../../contexts/crime-data-context';
 import Dashboard from '../../components/my-dashboard/my-dashboard-component';
 import CrimeHistogram from '../../components/crime-histogram/crime-histogram-component';
 
+import './dashboard-visuals.styles.css'
 
 const DashboardVisuals = () => {
   const { crimes, loading } = useCrimesContext();
 
   return (
     <Dashboard>
-      <div>
+      <div className='dash'>
           <p id='display'>Display of <b>Crimes</b> vs <b>No. of Occurrences</b></p>
           {loading ? <Loader /> : <CrimeChart />}
           {crimes && <PieChart className="pie" />}

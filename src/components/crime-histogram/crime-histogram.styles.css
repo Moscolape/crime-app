@@ -16,3 +16,13 @@
   margin-left: 2rem;
   cursor: pointer;
 }
+
+@media screen and (max-width: 800px) {
+  .filter-container select {
+    width: 6.5rem;
+  }
+
+  .filter-container button {
+    margin-left: 1rem;
+  }
+}
