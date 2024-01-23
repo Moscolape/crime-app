@@ -13,7 +13,7 @@ const CrimeMap = () => {
   }
 
   const blueMarkerIcon = new L.Icon({
-    iconUrl: '/location.png',
+    iconUrl: '/location (1).png',
     iconSize: [12, 12]
   });
 
