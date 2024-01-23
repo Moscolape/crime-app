@@ -5,3 +5,11 @@
 .load-map {
   margin: 10px;
 }
+
+.marker-triangle {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid red; /* You can change the color here */
+}

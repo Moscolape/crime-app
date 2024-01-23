@@ -13,8 +13,8 @@ const CrimeMap = () => {
   }
 
   const blueMarkerIcon = new L.Icon({
-    iconUrl: 'https://toppng.com/uploads/preview/location-vector-symbol-google-maps-marker-blue-115632628665jan8tcjlz.png',
-    iconSize: [10, 10]
+    iconUrl: 'https://toppng.com/uploads/preview/location-png-icon-location-icon-png-free-11562933803vththezlcl.png',
+    iconSize: [12, 12]
   });
 
 

@@ -12,7 +12,7 @@ const ContextAnalysis = () => {
 
   // Use a ref to keep track of the chart instance
   const chartRef = useRef(null);
-  const chartCanvas = useRef(null); // Define chartCanvas using useRef
+  const chartCanvas = useRef(null);
 
   useEffect(() => {
     // When responseData changes, update the chart data and percentages
@@ -46,11 +46,11 @@ const ContextAnalysis = () => {
       }
 
       // Create a new chart
-      const ctx = chartCanvas.current.getContext('2d'); // Use chartCanvas ref
+      const ctx = chartCanvas.current.getContext('2d');
       chartRef.current = new Chart(ctx, {
         type: 'pie',
         data: {
-          labels: responseLabels, // Use the response labels
+          labels: responseLabels,
           datasets: [
             {
               data: values,
