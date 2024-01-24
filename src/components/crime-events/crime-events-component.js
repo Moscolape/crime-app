@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import './crime-events.styles.css';
 import { useCrimesContext } from '../../contexts/crime-data-context';
 
+// import AOS from 'aos';
+// import 'aos/dist/aos.css';
+
 import Loader from '../loader/loading-component';
 
 
@@ -72,7 +75,7 @@ const CrimeEvents = () => {
 
 
     return (
-        <div className="crime-types">
+        <div className="crime-types" data-aos="zoom-in-up">
             <div className='check-crime-event'>
                 <input type='date' onInput={getDate} className='crime-date' />
                 <div>

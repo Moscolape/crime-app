@@ -100,7 +100,7 @@ const ContextAnalysis = () => {
 
   return (
     <Dashboard>
-      <div className='general'>
+      <div className='general' data-aos="zoom-in-up">
         <h2>Enter Text for Analysis</h2>
         <form onSubmit={handleSubmit}>
           <textarea

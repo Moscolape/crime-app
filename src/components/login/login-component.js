@@ -1,6 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useContext } from 'react';
 
+// import AOS from 'aos';
+// import 'aos/dist/aos.css';
+
 import TokenContext from '../../contexts/token-context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -31,6 +34,18 @@ const Login = () => {
         setPassword(event.target.value);
     };  
 
+    // useEffect(() => {
+    //     AOS.init({
+    //         delay: 200,
+    //         duration: 1500,
+    //         once: false,
+    //         mirror: false, 
+    //     });
+    //     return () => {
+    //       AOS.refreshHard();
+    //     };
+    // }, []);
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -50,7 +65,7 @@ const Login = () => {
             password: password
         };
 
-        console.log(loginData);
+        // console.log(loginData);
 
         // Make the POST request
         fetch(url, {
@@ -68,8 +83,8 @@ const Login = () => {
             return response.json();
         })
         .then(data => {
-            console.log("Login Response:", data);
-            console.log("User Token:", data.token);
+            // console.log("Login Response:", data);
+            // console.log("User Token:", data.token);
 
             // Get the user's token
             const token = data.token;
@@ -97,16 +112,18 @@ const Login = () => {
         <>
             <main className="main">
                 <section className="form-section">
-                    <div className="login">
+                    <div className="login" 
+                    data-aos="zoom-out" 
+                    data-aos-duration="1000">
                         <span id="circle"></span>
                         <h3>CFAS Log-In</h3>
                     </div>
                     <form onSubmit={handleSubmit} className="log">
-                        <div>
+                        <div data-aos="fade-left" data-aos-duration="1500">
                             <label htmlFor="email">Email Address:</label><br />
                             <input type="email" name="email" onChange={handleEmail} value={email} id="email" required />
                         </div>
-                        <div style={{position: 'relative'}}>
+                        <div style={{position: 'relative'}} data-aos="fade-left" data-aos-duration="1500">
                             <label htmlFor="pwd">Password:</label><br />
                             <input
                                 type={passwordVisible ? 'text' : 'password'}
@@ -122,7 +139,7 @@ const Login = () => {
                                 className="eye-icon"
                             />
                         </div>
-                        <div className="reset">
+                        <div className="reset" data-aos="fade-left" data-aos-duration="1500">
                             <span>
                                 <input type="checkbox" name="checkbox" id="checkbox" /> Remember me
                             </span>
@@ -130,7 +147,7 @@ const Login = () => {
                                 <span>Forgotten password?</span>
                             </Link>
                         </div>
-                        <button type="submit" className="btn" disabled={loading}>
+                        <button type="submit" className="btn" disabled={loading} data-aos="fade-left" data-aos-duration="1500">
                             {loading ? "Logging In..." : "Log In"}
                         </button>
                         {error && <p className="error-message">{error}</p>}
@@ -138,11 +155,11 @@ const Login = () => {
                     {/* <p><span style={{color:'gray',fontSize: 13}}>Don't have an account?</span> <Link to="/sign-up" style={{color:'darkblue',fontSize: 13,textDecoration:'none'}}>Sign up</Link></p> */}
                 </section>
                 <section className="circle-section">
-                    <h1>CFAS</h1>
-                    <p>
+                    <h1 data-aos="fade-up" data-aos-duration="1000">CFAS</h1>
+                    <p data-aos="fade-right" data-aos-duration="2000">
                         CFAS is a crime forecasting and analysis system built to aid security agencies in carrying out their responsibilities in a more timely manner to enhance security. It uses an AI prediction algorithm based on crime datasets of past criminal activities.
                     </p>
-                    <div className="learn">
+                    <div className="learn" data-aos="fade-down" data-aos-duration="1500">
                         <div className="span">
                             <span className="more">⇐ Log in to learn more</span>
                         </div>

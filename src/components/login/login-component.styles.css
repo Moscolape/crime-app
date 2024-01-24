@@ -94,6 +94,10 @@ input[type='email'] {
     cursor: pointer;
 }
 
+.btn:hover {
+    background: linear-gradient(to right, #795bcc, #c26a4a);
+}
+
 .forget {
     text-decoration: none;
     color: darkblue;

@@ -95,7 +95,7 @@ const PieChart = () => {
   const isButtonDisabled = filteredState.trim() === '';
 
   return (
-    <div className='pie'>
+    <div className='pie' data-aos="fade-left">
       <h3>Enter state to check crime distribution</h3>
       <div className="filter-container">
         <input

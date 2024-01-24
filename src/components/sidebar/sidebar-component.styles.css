@@ -22,6 +22,12 @@
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
+    transition: transform 0.5s;
+}
+
+#btn-bottom:hover {
+    background: linear-gradient(to right, #795bcc, #c26a4a);
+    transform: scale(1.1);
 }
 
 .sign-out {
@@ -59,6 +65,11 @@
     border-radius: 5px;
     outline: none;
     padding-left: 25px;
+}
+.nav-search-input:focus {
+    outline: 0.5px solid black;
+    /* border: 1px solid black; */
+    border-radius: 3px;
 }
 
 .search-icon {

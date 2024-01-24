@@ -5,8 +5,12 @@ import { CrimesProvider } from './contexts/crime-data-context';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from "react";
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import './App.css';
 import Spinner from './components/spinner/spinner-component';
+
 
 const Login = lazy(() => import("./components/login/login-component"));
 const PasswordReset = lazy(() => import("./components/reset-password/reset-password-component"));
@@ -18,6 +22,15 @@ const ContextAnalysis = lazy(() => import("./pages/context-analysis/context-anal
 const App = () => {
   const storedToken = sessionStorage.getItem('store-token');
   const [token, setToken] = useState(storedToken);
+
+  useEffect(() => {
+    AOS.init({
+        delay: 200,
+        duration: 1500,
+        once: false,
+        mirror: false, 
+    });
+}, []);
 
   useEffect(() => {
     if (token) {

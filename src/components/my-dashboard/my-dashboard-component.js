@@ -65,9 +65,9 @@ const Dashboard = ({children}) => {
                 return response.json();
             })
             .then(data => {
-                console.log("User Data:", data);
+                // console.log("User Data:", data);
                 setUser(data);
-                console.log(token);
+                // console.log(token);
                 
                 // Store user data and token in sessionStorage
                 sessionStorage.setItem('user', JSON.stringify(data)); 

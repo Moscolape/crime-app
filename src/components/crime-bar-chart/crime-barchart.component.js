@@ -2,11 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import { Chart } from 'chart.js/auto';
 import { useCrimesContext } from '../../contexts/crime-data-context';
 
+
 import './crime-barchart.styles.css';
 
 const CrimeChart = () => {
   const { crimes } = useCrimesContext();
   const chartRef = useRef(null);
+
 
   useEffect(() => {
     if (crimes && crimes.data && crimes.data.length > 0) {
@@ -80,7 +82,7 @@ const CrimeChart = () => {
   }, [crimes]);
 
   return (
-    <div className='canvas'>
+    <div className='canvas' data-aos="zoom-in-down">
       <canvas id="crimeChart"></canvas>
     </div>
   );
