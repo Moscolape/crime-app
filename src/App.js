@@ -59,11 +59,11 @@ const App = () => {
               />
               <Route path="/sign-up" element={<SignUp />} />
               <Route
-                path="/dashboard"
+                path="/dashboar"
                 element={<PrivateRoute path="/dashboard" element={<DashboardVisuals />} />}
               />
               <Route
-                path="/context-analysis"
+                path="/contex-analysis"
                 element={<PrivateRoute path="/context-analysis" element={<ContextAnalysis />} />}
               />
             </Routes>
